@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#37474f</color>
+    <color name="colorPrimaryLight">#62727b</color>
+    <color name="secondaryColor">#ffa000</color>
+    <color name="secondaryLightColor">#ffd149</color>
+    <color name="secondaryDarkColor">#c67100</color>
+    <color name="colorPrimaryDark">#102027</color>
+    <color name="colorAccent">#96bb82</color>
+
+    <!-- Custom Color -->
+    <color name="colorPrimaryTransparent50">#8037474f</color>
+    <color name="colorPrimaryLightTransparent50">#8062727b</color>
+    <color name="colorPrimaryDarkTransparent50">#80102027</color>
+    <color name="colorPrimaryGreyTransparent50">#B3616161</color>
+
+    <color name="colorPrimaryWhite100">#FFFFFF</color>
+    <color name="colorPrimaryBlack100">#000000</color>
+    <color name="colorPrimaryGrey80">#616161</color>
+    <color name="colorPrimaryGrey60">#757575</color>
+    <color name="colorPrimaryGrey40">#9E9E9E</color>
+    <color name="colorPrimaryGrey20">#BDBDBD</color>
+
+    <color name="colorSuccess">#1C8721</color>
+    <color name="colorWarning">#FDBE3B</color>
+    <color name="colorDanger">#D32F2F</color>
+
+    <color name="colorIconWhite100">#FFFFFF</color>
+    <color name="colorIconBlack100">#000000</color>
+    <color name="colorIconGrey100">#3d3d3d</color>
+    <color name="colorIconGrey80">#616161</color>
+    <color name="colorIconGrey60">#757575</color>
+    <color name="colorIconGrey40">#9E9E9E</color>
+    <color name="colorIconGrey20">#BDBDBD</color>
+    <color name="colorIconGrey10">#EEEEEE</color>
+
+    <color name="colorTextWhite100">#FFFFFF</color>
+    <color name="colorTextBlack100">#000000</color>
+    <color name="colorTextGrey100">#3d3d3d</color>
+    <color name="colorTextGrey80">#616161</color>
+    <color name="colorTextGrey60">#757575</color>
+    <color name="colorTextGrey40">#9E9E9E</color>
+    <color name="colorTextGrey20">#BDBDBD</color>
+    <color name="colorTextGrey10">#EEEEEE</color>
+
+</resources>

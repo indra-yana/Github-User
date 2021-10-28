@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?selectableItemBackground"
+    android:padding="@dimen/_4sdp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/ivItemThumbnail"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_border_color="@color/colorPrimaryGrey40"
+        app:riv_border_width="@dimen/_2sdp"
+        app:riv_corner_radius="@dimen/_4sdp"
+        tools:src="@tools:sample/avatars" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginStart="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:background="@color/colorPrimaryGrey40"
+        app:layout_constraintTop_toBottomOf="@+id/ivItemThumbnail" />
+
+    <TextView
+        android:id="@+id/tvItemTitle"
+        style="@style/Text.Title.Light"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivItemThumbnail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivItemThumbnail"
+        app:layout_constraintTop_toTopOf="@+id/ivItemThumbnail"
+        tools:text="@string/text_lorem_ipsum_title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
