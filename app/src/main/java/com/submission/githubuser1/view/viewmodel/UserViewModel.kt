@@ -24,7 +24,6 @@ class UserViewModel(private val repository: UserRepository) : BaseUserViewModel(
     private val _userDetail: MutableLiveData<ResponseStatus<UserDetailResponse>> = MutableLiveData()
     private val _userFollower: MutableLiveData<ResponseStatus<FollowResponse>> = MutableLiveData()
     private val _userFollowing: MutableLiveData<ResponseStatus<FollowResponse>> = MutableLiveData()
-    private val _isLoading: MutableLiveData<ResponseStatus<Boolean>> = MutableLiveData()
 
     val users: LiveData<ResponseStatus<UserResponse>> = _users
     val userList: LiveData<ResponseStatus<MutableList<User>>> = _userList
@@ -32,7 +31,6 @@ class UserViewModel(private val repository: UserRepository) : BaseUserViewModel(
     val userDetail: LiveData<ResponseStatus<UserDetailResponse>> = _userDetail
     val userFollower: LiveData<ResponseStatus<FollowResponse>> = _userFollower
     val userFollowing: LiveData<ResponseStatus<FollowResponse>> = _userFollowing
-    val isLoading: LiveData<ResponseStatus<Boolean>> = _isLoading
 
     override fun userList(context: Context) = viewModelScope.launch {
         _userList.value = ResponseStatus.Loading
