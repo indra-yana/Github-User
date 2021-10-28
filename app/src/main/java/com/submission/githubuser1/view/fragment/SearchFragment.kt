@@ -99,6 +99,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, UserViewModel, UserRe
             }
 
             srlRefresh.setOnRefreshListener {
+                adapter.clearData()
                 doSearch(currentSearchQuery)
             }
 
