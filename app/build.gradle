@@ -4,6 +4,9 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
 apply plugin: 'androidx.navigation.safeargs'
 
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -16,6 +19,13 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        /*
+            Note: Please add accessToken field on local.properties e.g. accessToken=xxxxxx.yyyyyy.zzzzzz
+            then goto Build - Make Project or Rebuild Project
+        */
+        buildConfigField "String", "ACCESS_TOKEN", (localProperties['accessToken'] != null) ? "\"${localProperties['accessToken']}\"" : "\"\""
+        buildConfigField "String", "API_KEY", (localProperties['apiKey'] != null) ? "\"${localProperties['apiKey']}\"" : "\"\""
     }
 
     buildTypes {

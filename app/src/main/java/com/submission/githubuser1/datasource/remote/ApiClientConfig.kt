@@ -34,7 +34,11 @@ object ApiClientConfig {
                 .newBuilder()
                 .url(urlBuilder)
                 .addHeader("Accept", "application/json")
-                // .addHeader("Authorization", "token ${Constant.API_TOKEN}") // Uncomment this line then add the Github API token on Constant class
+                .apply {
+                    if (Constant.ACCESS_TOKEN.isNotEmpty()) {
+                        addHeader("Authorization", "token ${Constant.ACCESS_TOKEN}")
+                    }
+                }
                 .build()
 
             return@Interceptor chain.proceed(requestHeaders)
