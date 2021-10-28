@@ -16,7 +16,6 @@ import com.submission.githubuser1.databinding.FragmentUserDetailBinding
 import com.submission.githubuser1.datasource.remote.response.ResponseStatus
 import com.submission.githubuser1.datasource.remote.response.User
 import com.submission.githubuser1.datasource.remote.response.UserDetailResponse
-import com.submission.githubuser1.helper.Constant
 import com.submission.githubuser1.helper.handleRequestError
 import com.submission.githubuser1.helper.visible
 import com.submission.githubuser1.repository.UserRepository
@@ -37,7 +36,7 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding, UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        user = arguments?.getParcelable(Constant.EXTRA_KEY_USER)
+        user = UserDetailFragmentArgs.fromBundle(arguments as Bundle).user
         fetchData()
     }
 

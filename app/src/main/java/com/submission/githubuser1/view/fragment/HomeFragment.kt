@@ -5,14 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.submission.githubuser1.R
 import com.submission.githubuser1.databinding.FragmentHomeBinding
 import com.submission.githubuser1.datasource.remote.response.ResponseStatus
 import com.submission.githubuser1.datasource.remote.response.User
-import com.submission.githubuser1.helper.Constant
 import com.submission.githubuser1.helper.handleRequestError
 import com.submission.githubuser1.helper.visible
 import com.submission.githubuser1.listener.IOnItemClickListener
@@ -81,8 +79,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
     }
 
     private fun gotoDetail(user: User) {
-        val bundle = bundleOf(Constant.EXTRA_KEY_USER to user)
-        findNavController().navigate(R.id.action_homeFragment_to_userDetailFragment, bundle)
+        val directions = HomeFragmentDirections.actionHomeFragmentToUserDetailFragment(user)
+        findNavController().navigate(directions)
     }
 
     private fun observeUserList() {

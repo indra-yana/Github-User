@@ -9,14 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.SearchView
-import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.submission.githubuser1.R
 import com.submission.githubuser1.databinding.FragmentSearchBinding
 import com.submission.githubuser1.datasource.remote.response.ResponseStatus
 import com.submission.githubuser1.datasource.remote.response.User
-import com.submission.githubuser1.helper.Constant
 import com.submission.githubuser1.helper.handleRequestError
 import com.submission.githubuser1.helper.visible
 import com.submission.githubuser1.listener.IOnItemClickListener
@@ -121,8 +118,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, UserViewModel, UserRe
 
     private fun gotoDetail(user: User) {
         showInputMethod(false)
-        val bundle = bundleOf(Constant.EXTRA_KEY_USER to user)
-        findNavController().navigate(R.id.action_searchFragment_to_userDetailFragment, bundle)
+        val directions = SearchFragmentDirections.actionSearchFragmentToUserDetailFragment(user)
+        findNavController().navigate(directions)
     }
 
     private fun buildUserListRV() {
