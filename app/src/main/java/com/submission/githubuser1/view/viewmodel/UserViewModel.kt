@@ -16,6 +16,7 @@ import kotlinx.coroutines.launch
  * Github: https://github.com/indra-yana
  ****************************************************/
 
+@Suppress("unused")
 class UserViewModel(private val repository: UserRepository) : BaseUserViewModel() {
 
     private val _users: MutableLiveData<ResponseStatus<UserResponse>> = MutableLiveData()

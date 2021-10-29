@@ -9,6 +9,7 @@ import com.submission.githubuser1.BuildConfig
  * Github: https://github.com/indra-yana
  ****************************************************/
 
+@Suppress("unused")
 object Constant {
     const val EXTRA_KEY_USER = "user"
     const val BASE_URL = "https://api.github.com"

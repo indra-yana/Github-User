@@ -91,6 +91,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, UserViewModel, UserRe
 
             searchView.requestFocus()
             searchView.setOnQueryTextFocusChangeListener { _, show ->
+                // TODO: handle Inputmethod method correctly
                 showInputMethod(show)
             }
             searchView.setOnCloseListener {

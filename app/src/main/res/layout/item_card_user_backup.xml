@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="@dimen/_5sdp"
-    android:padding="@dimen/_4sdp">
+    android:padding="@dimen/_4sdp"
+    tools:keep="@layout/item_card_user_backup">
 
     <View
         android:id="@+id/viewSupporter"

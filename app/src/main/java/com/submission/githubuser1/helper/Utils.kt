@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.submission.githubuser1.helper
 
 import android.content.Context

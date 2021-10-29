@@ -25,7 +25,7 @@ abstract class BaseFragment<VB : ViewBinding, VM: ViewModel, BR: BaseRepository>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this, ViewModelFactory(getRepository())).get(getViewModel())
+        viewModel = ViewModelProvider(this, ViewModelFactory(getRepository()))[getViewModel()]
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
