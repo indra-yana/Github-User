@@ -1,5 +1,7 @@
 package com.submission.githubuser1.listener
 
+import com.submission.githubuser1.datasource.remote.response.User
+
 
 /****************************************************
  * Created by Indra Muliana
@@ -9,5 +11,5 @@ package com.submission.githubuser1.listener
  ****************************************************/
 
 interface IOnItemClickListener {
-    fun onItemClicked(data: Any, position: Int)
+    fun onItemClicked(data: User, position: Int)
 }

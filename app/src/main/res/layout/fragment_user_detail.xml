@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@drawable/bg_layout_header"
+            android:elevation="@dimen/_4sdp"
             android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -251,10 +252,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
             android:background="@drawable/bg_layout_header_2"
+            android:elevation="@dimen/_4sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shimmerContainer"
-            app:tabIndicatorColor="@color/colorIconGrey20"
+            app:tabIndicatorColor="@color/colorPrimaryWhite100"
             app:tabTextColor="@android:color/white" />
 
         <androidx.viewpager2.widget.ViewPager2

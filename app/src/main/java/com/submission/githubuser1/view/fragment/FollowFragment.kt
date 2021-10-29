@@ -65,8 +65,7 @@ class FollowFragment : BaseFragment<FragmentFollowBinding, UserViewModel, UserRe
     private fun initAdapter() {
         adapter = UserFollowAdapter().apply {
             iOnItemClickListener = object : IOnItemClickListener {
-                override fun onItemClicked(data: Any, position: Int) {
-                    data as User
+                override fun onItemClicked(data: User, position: Int) {
                     Toast.makeText(requireContext(), data.login, Toast.LENGTH_SHORT).show()
                 }
             }

@@ -109,9 +109,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, UserViewModel, UserRe
     private fun initAdapter() {
         adapter = UserAdapter().apply {
             iOnItemClickListener = object : IOnItemClickListener {
-                override fun onItemClicked(data: Any, position: Int) {
-                    // Using data type any because the listener onItemClicked is used in other fragment too
-                    gotoDetail(data as User)
+                override fun onItemClicked(data: User, position: Int) {
+                    gotoDetail(data)
                 }
             }
         }
