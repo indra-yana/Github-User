@@ -1,5 +1,6 @@
 package com.submission.githubuser1.model
 
+import android.annotation.SuppressLint
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
@@ -10,6 +11,7 @@ import kotlinx.parcelize.Parcelize
  * Github: https://github.com/indra-yana
  ****************************************************/
 
+@SuppressLint("ParcelCreator")
 @Parcelize
 data class User(
     val name: String,

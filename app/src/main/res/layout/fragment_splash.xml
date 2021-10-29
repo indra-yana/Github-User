@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".view.fragment.SplashFragment">
+    tools:context=".view.fragment.SplashFragment"
+    tools:ignore="Overdraw">
 
     <ImageView
         android:layout_width="@dimen/_80sdp"

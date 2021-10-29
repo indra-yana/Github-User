@@ -15,7 +15,7 @@ class SplashFragment : Fragment() {
 
     private lateinit var splashBinding: FragmentSplashBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         splashBinding = FragmentSplashBinding.inflate(inflater, container, false)
 
         return splashBinding.root
