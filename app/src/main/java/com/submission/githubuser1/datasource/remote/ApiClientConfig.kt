@@ -1,5 +1,6 @@
 package com.submission.githubuser1.datasource.remote
 
+import com.submission.githubuser1.BuildConfig
 import com.submission.githubuser1.helper.Constant
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -51,9 +52,13 @@ object ApiClientConfig {
 
         // OkHttpClient
         val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
             .addInterceptor(requestInterceptor)
-            .connectTimeout(60, TimeUnit.SECONDS)
+            .apply {
+                if(BuildConfig.DEBUG) {
+                    addInterceptor(loggingInterceptor)
+                }
+            }
+            .connectTimeout(Constant.CONNECTION_TIMEOUT, TimeUnit.SECONDS)
             .build()
 
         retrofit = Retrofit.Builder()
