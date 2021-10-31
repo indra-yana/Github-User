@@ -20,22 +20,6 @@ import com.submission.githubuser1.view.viewmodel.UserViewModel
 
 class FollowFragment : BaseFragment<FragmentFollowBinding, UserViewModel, UserRepository>() {
 
-    companion object {
-        private val TAG = this::class.java.simpleName
-        private const val ARG_FRAGMENT_TITLE = "page_title"
-        private const val ARG_FRAGMENT_KEY = "key_username"
-
-        @JvmStatic
-        fun newInstance(title: String, key: String?) : FollowFragment {
-            return FollowFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_FRAGMENT_TITLE, title)
-                    putString(ARG_FRAGMENT_KEY, key)
-                }
-            }
-        }
-    }
-
     private var username: String? = null
     private var title: String? = null
 
@@ -145,6 +129,22 @@ class FollowFragment : BaseFragment<FragmentFollowBinding, UserViewModel, UserRe
 
                 shimmerPlaceholder.root.visible(false)
                 rvUser.visible(true)
+            }
+        }
+    }
+
+    companion object {
+        private val TAG = this::class.java.simpleName
+        private const val ARG_FRAGMENT_TITLE = "page_title"
+        private const val ARG_FRAGMENT_KEY = "key_username"
+
+        @JvmStatic
+        fun newInstance(title: String, key: String?): FollowFragment {
+            return FollowFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_FRAGMENT_TITLE, title)
+                    putString(ARG_FRAGMENT_KEY, key)
+                }
             }
         }
     }
