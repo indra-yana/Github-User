@@ -72,8 +72,8 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding, UserViewModel
                 tvFollowingCount.text = it.following.toString()
                 tvItemTitle.text = it.name
                 tvItemSubtitle.text = ("@${it.login}")
-                tvItemLocation.text = it.location ?: "N/A"
-                tvItemCompany.text = it.company ?: "N/A"
+                tvItemLocation.text = it.location ?: getString(R.string.text_not_available)
+                tvItemCompany.text = it.company ?: getString(R.string.text_not_available)
             }
         }
     }

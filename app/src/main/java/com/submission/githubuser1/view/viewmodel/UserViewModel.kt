@@ -33,6 +33,7 @@ class UserViewModel(private val repository: UserRepository) : BaseUserViewModel(
     val userFollower: LiveData<ResponseStatus<FollowResponse>> = _userFollower
     val userFollowing: LiveData<ResponseStatus<FollowResponse>> = _userFollowing
 
+    // TODO: Remove this unused method
     override fun userList(context: Context) = viewModelScope.launch {
         _userList.value = ResponseStatus.Loading
         _userList.value = repository.userList(context)
