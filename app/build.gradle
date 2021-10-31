@@ -21,7 +21,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         /*
-            Note: Please add accessToken field on local.properties e.g. accessToken=xxxxxx.yyyyyy.zzzzzz
+            Note: add your accessToken field if needed to avoid limitation request (https://developer.github.com/v3/#rate-limiting) on local.properties
+            e.g. accessToken=xxxxxx.yyyyyy.zzzzzz
             then goto Build - Make Project or Rebuild Project
         */
         buildConfigField "String", "ACCESS_TOKEN", (localProperties['accessToken'] != null) ? "\"${localProperties['accessToken']}\"" : "\"\""
@@ -98,8 +99,8 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 
     // Kotlin Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
