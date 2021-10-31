@@ -5,10 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.submission.githubuser1.R
@@ -17,6 +15,7 @@ import com.submission.githubuser1.datasource.remote.response.ResponseStatus
 import com.submission.githubuser1.datasource.remote.response.User
 import com.submission.githubuser1.datasource.remote.response.UserDetailResponse
 import com.submission.githubuser1.helper.handleRequestError
+import com.submission.githubuser1.helper.loadImage
 import com.submission.githubuser1.helper.visible
 import com.submission.githubuser1.repository.UserRepository
 import com.submission.githubuser1.view.adapter.UserFollowFragmentAdapter
@@ -67,11 +66,7 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding, UserViewModel
                     findNavController().navigateUp()
                 }
 
-                Glide.with(requireView().context)
-                    .load(it.avatarUrl)
-                    .placeholder(ContextCompat.getDrawable(root.context, R.drawable.img_placeholder))
-                    .into(ivAvatar)
-
+                ivAvatar.loadImage(it.avatarUrl)
                 tvRepositoryCount.text = it.publicRepos.toString()
                 tvFollowersCount.text = it.followers.toString()
                 tvFollowingCount.text = it.following.toString()

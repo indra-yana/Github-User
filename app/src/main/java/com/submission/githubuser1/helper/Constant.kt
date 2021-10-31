@@ -15,4 +15,5 @@ object Constant {
     const val BASE_URL = "https://api.github.com"
     const val API_KEY = BuildConfig.API_KEY
     const val ACCESS_TOKEN = BuildConfig.ACCESS_TOKEN
+    const val DELAY_SPLASH = 2000L
 }

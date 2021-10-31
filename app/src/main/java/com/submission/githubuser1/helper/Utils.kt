@@ -6,8 +6,11 @@ import android.content.Context
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.submission.githubuser1.R
 import com.submission.githubuser1.datasource.remote.response.ResponseStatus
@@ -107,4 +110,14 @@ fun showInputKey(view: View, show: Boolean) {
 fun showInputKey(context: Context, show: Boolean) {
     val input = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     input.toggleSoftInput(if (show) InputMethodManager.SHOW_FORCED else InputMethodManager.RESULT_HIDDEN, 0)
+}
+
+fun ImageView.loadImage(url: String?) {
+    Glide.with(this.context)
+        .load(url)
+        // .apply(RequestOptions().override(500, 500))
+        .placeholder(ContextCompat.getDrawable(this.context, R.drawable.img_placeholder))
+        .error(ContextCompat.getDrawable(this.context, R.drawable.img_placeholder))
+        .centerCrop()
+        .into(this)
 }

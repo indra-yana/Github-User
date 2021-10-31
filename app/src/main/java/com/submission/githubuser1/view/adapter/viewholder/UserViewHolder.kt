@@ -1,10 +1,8 @@
 package com.submission.githubuser1.view.adapter.viewholder
 
-import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
-import com.submission.githubuser1.R
 import com.submission.githubuser1.databinding.ItemCardUserBinding
 import com.submission.githubuser1.datasource.remote.response.User
+import com.submission.githubuser1.helper.loadImage
 import com.submission.githubuser1.listener.IOnItemClickListener
 
 /****************************************************
@@ -21,11 +19,7 @@ class UserViewHolder(private val binding: ItemCardUserBinding) : BaseViewHolder(
             tvItemTitle.text = data.login
             tvItemSubtitle.text = ("@${data.login}")
             tvUserLink.text = data.url
-
-            Glide.with(root.context)
-                    .load(data.avatarUrl)
-                    .placeholder(ContextCompat.getDrawable(root.context, R.drawable.img_placeholder))
-                    .into(ivItemThumbnail)
+            ivItemThumbnail.loadImage(data.avatarUrl)
 
             root.setOnClickListener {
                 listener?.onItemClicked(data, absoluteAdapterPosition)

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.submission.githubuser1.R
 import com.submission.githubuser1.databinding.FragmentSplashBinding
+import com.submission.githubuser1.helper.Constant
 
 class SplashFragment : Fragment() {
 
@@ -26,6 +27,6 @@ class SplashFragment : Fragment() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
-        }, 2000)
+        }, Constant.DELAY_SPLASH)
     }
 }
