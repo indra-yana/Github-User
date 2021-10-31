@@ -20,7 +20,9 @@ import com.submission.githubuser1.view.viewmodel.ViewModelFactory
 
 abstract class BaseFragment<VB : ViewBinding, VM: ViewModel, BR: BaseRepository> : Fragment() {
 
-    protected lateinit var viewBinding: VB
+    private var _viewBinding: VB? = null
+
+    protected val viewBinding get() = _viewBinding!!
     protected lateinit var viewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,9 +30,14 @@ abstract class BaseFragment<VB : ViewBinding, VM: ViewModel, BR: BaseRepository>
         viewModel = ViewModelProvider(this, ViewModelFactory(getRepository()))[getViewModel()]
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        viewBinding = getViewBinding(inflater, container)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _viewBinding = getViewBinding(inflater, container)
         return viewBinding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _viewBinding = null
     }
 
     abstract fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
