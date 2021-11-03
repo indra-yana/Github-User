@@ -1,6 +1,7 @@
 package com.submission.githubuser1.repository
 
 import com.submission.githubuser1.BaseApplication
+import com.submission.githubuser1.datasource.local.AppDatabase
 import com.submission.githubuser1.datasource.remote.IApiEndPoint
 import com.submission.githubuser1.datasource.remote.response.ResponseStatus
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +17,7 @@ import kotlinx.coroutines.withContext
 abstract class BaseRepository {
 
     protected val remoteApi: IApiEndPoint by lazy { BaseApplication.remoteApi }
+    protected val appDB: AppDatabase by lazy { BaseApplication.appDB }
 
     suspend fun <T> safeApiCall(apiCall: suspend () -> T): ResponseStatus<T> {
         return withContext(Dispatchers.IO) {

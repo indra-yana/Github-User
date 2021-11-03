@@ -1,70 +1,66 @@
 package com.submission.githubuser1.datasource.remote.response
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-data class UserDetailResponse(
-    @SerializedName("avatar_url")
-    val avatarUrl: String,
-    @SerializedName("bio")
-    val bio: Any,
-    @SerializedName("blog")
-    val blog: String,
-    @SerializedName("company")
-    val company: String?,
-    @SerializedName("created_at")
-    val createdAt: String,
-    @SerializedName("email")
-    val email: Any,
-    @SerializedName("events_url")
-    val eventsUrl: String,
-    @SerializedName("followers")
-    val followers: Int,
-    @SerializedName("followers_url")
-    val followersUrl: String,
-    @SerializedName("following")
-    val following: Int,
-    @SerializedName("following_url")
-    val followingUrl: String,
-    @SerializedName("gists_url")
-    val gistsUrl: String,
-    @SerializedName("gravatar_id")
-    val gravatarId: String,
-    @SerializedName("hireable")
-    val hireable: Any,
-    @SerializedName("html_url")
-    val htmlUrl: String,
+@Entity(tableName = "user_details", indices = [Index(value = ["id"], unique = true)])
+class UserDetailResponse(
+    @PrimaryKey
     @SerializedName("id")
+    @ColumnInfo(name = "id")
     val id: Int,
-    @SerializedName("location")
-    val location: String?,
-    @SerializedName("login")
-    val login: String,
+
     @SerializedName("name")
+    @ColumnInfo(name = "name")
     val name: String,
-    @SerializedName("node_id")
-    val nodeId: String,
-    @SerializedName("organizations_url")
-    val organizationsUrl: String,
-    @SerializedName("public_gists")
-    val publicGists: Int,
+
+    @SerializedName("login")
+    @ColumnInfo(name = "login")
+    val login: String,
+
+    @SerializedName("email")
+    @ColumnInfo(name ="email")
+    val email: String?,
+
+    @SerializedName("company")
+    @ColumnInfo(name = "company")
+    val company: String?,
+
+    @SerializedName("location")
+    @ColumnInfo(name = "location")
+    val location: String?,
+
+    @SerializedName("avatar_url")
+    @ColumnInfo(name ="avatar_url")
+    val avatarUrl: String,
+
+    @SerializedName("followers")
+    @ColumnInfo(name = "followers")
+    val followers: Int,
+
+    @SerializedName("following")
+    @ColumnInfo(name = "following")
+    val following: Int,
+
     @SerializedName("public_repos")
+    @ColumnInfo(name = "public_repos")
     val publicRepos: Int,
-    @SerializedName("received_events_url")
-    val receivedEventsUrl: String,
-    @SerializedName("repos_url")
-    val reposUrl: String,
-    @SerializedName("site_admin")
-    val siteAdmin: Boolean,
-    @SerializedName("starred_url")
-    val starredUrl: String,
-    @SerializedName("subscriptions_url")
-    val subscriptionsUrl: String,
-    @SerializedName("twitter_username")
-    val twitterUsername: Any,
-    @SerializedName("type")
-    val type: String,
+
+    @SerializedName("created_at")
+    @ColumnInfo(name = "created_at")
+    val createdAt: String,
+
     @SerializedName("updated_at")
+    @ColumnInfo(name = "updated_at")
     val updatedAt: String,
+
     @SerializedName("url")
-    val url: String
+    @ColumnInfo(name = "url")
+    val url: String,
+
+    @ColumnInfo(name = "is_favourite")
+    val isFavourite: Int = 0,
 )

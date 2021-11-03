@@ -1,6 +1,7 @@
 package com.submission.githubuser1
 
 import android.app.Application
+import com.submission.githubuser1.datasource.local.AppDatabase
 import com.submission.githubuser1.datasource.remote.ApiClientConfig
 import com.submission.githubuser1.datasource.remote.IApiEndPoint
 
@@ -16,12 +17,16 @@ class BaseApplication : Application() {
     companion object {
         @JvmStatic
         lateinit var remoteApi: IApiEndPoint
+
+        @JvmStatic
+        lateinit var appDB: AppDatabase
     }
 
     override fun onCreate() {
         super.onCreate()
 
         remoteApi = ApiClientConfig.initApi(IApiEndPoint::class.java)
+        appDB = AppDatabase.initDatabase(this)
     }
 
 }
