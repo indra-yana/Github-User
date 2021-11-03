@@ -52,7 +52,7 @@
                     android:text="@string/text_lorem_ipsum_title" />
 
                 <ImageButton
-                    android:id="@+id/ivHeaderMenu"
+                    android:id="@+id/btnAddFavourite"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:layout_marginStart="@dimen/_4sdp"
@@ -60,8 +60,8 @@
                     android:clipToPadding="false"
                     android:contentDescription="@string/app_name"
                     android:foreground="?selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_more"
-                    android:visibility="gone"
+                    android:src="@drawable/ic_favourite_border"
+                    android:visibility="visible"
                     app:tint="@color/colorPrimaryWhite100" />
 
             </LinearLayout>

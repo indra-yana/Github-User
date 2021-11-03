@@ -12,6 +12,8 @@
     <string name="text_btn_retry">Retry</string>
     <string name="text_search_user">Search github user</string>
     <string name="text_not_available">N/A</string>
+    <string name="text_added_to_favourite">Added to favourite</string>
+    <string name="text_removed_from_favourite">Removed from favourite</string>
 
     <!-- String resource error -->
     <string name="error_bad_request">%d: Bad request!</string>

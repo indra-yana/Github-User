@@ -14,7 +14,10 @@ import com.submission.githubuser1.datasource.remote.response.UserDetail
 interface UserDetailDao {
 
     @Query("SELECT * FROM user_details WHERE `id` = :key")
-    suspend fun find(key: String): UserDetail?
+    suspend fun find(key: Int): UserDetail?
+
+    @Query("SELECT * FROM user_details WHERE `login` = :username")
+    suspend fun find(username: String): UserDetail?
 
     @Query("SELECT * FROM user_details")
     suspend fun all(): List<UserDetail>
@@ -35,9 +38,9 @@ interface UserDetailDao {
     suspend fun exist(key: String): Boolean
 
     @Query("UPDATE user_details SET `is_favourite` = :isFavourite WHERE `id` = :key")
-    suspend fun setFavourite(key: String, isFavourite: Boolean): Int
+    suspend fun setFavourite(key: Int, isFavourite: Boolean): Int
 
     @Query("SELECT is_favourite FROM user_details WHERE `id` = :key")
-    suspend fun isFavourite(key: String): Int
+    suspend fun isFavourite(key: Int): Int
 
 }

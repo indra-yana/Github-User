@@ -25,6 +25,7 @@ class UserViewModel(private val repository: UserRepository) : BaseUserViewModel(
     private val _userDetail: MutableLiveData<ResponseStatus<UserDetail>> = MutableLiveData()
     private val _userFollower: MutableLiveData<ResponseStatus<FollowResponse>> = MutableLiveData()
     private val _userFollowing: MutableLiveData<ResponseStatus<FollowResponse>> = MutableLiveData()
+    private val _isFavourite: MutableLiveData<ResponseStatus<Boolean>> = MutableLiveData()
 
     val users: LiveData<ResponseStatus<UserResponse>> = _users
     val userList: LiveData<ResponseStatus<MutableList<User>>> = _userList
@@ -32,6 +33,7 @@ class UserViewModel(private val repository: UserRepository) : BaseUserViewModel(
     val userDetail: LiveData<ResponseStatus<UserDetail>> = _userDetail
     val userFollower: LiveData<ResponseStatus<FollowResponse>> = _userFollower
     val userFollowing: LiveData<ResponseStatus<FollowResponse>> = _userFollowing
+    val isFavourite: LiveData<ResponseStatus<Boolean>> get() = _isFavourite
 
     // TODO: Remove this unused method
     override fun userList(context: Context) = viewModelScope.launch {
@@ -63,4 +65,10 @@ class UserViewModel(private val repository: UserRepository) : BaseUserViewModel(
         _userFollowing.value = ResponseStatus.Loading
         _userFollowing.value = repository.userFollowing(username)
     }
+
+    override fun setFavourite(key: Int, isFavourite: Boolean) = viewModelScope.launch {
+        _isFavourite.value = ResponseStatus.Loading
+        _isFavourite.value = repository.setFavourite(key, isFavourite)
+    }
+
 }

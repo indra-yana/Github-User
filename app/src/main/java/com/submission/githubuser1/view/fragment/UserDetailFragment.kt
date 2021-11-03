@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -14,9 +15,7 @@ import com.submission.githubuser1.databinding.FragmentUserDetailBinding
 import com.submission.githubuser1.datasource.remote.response.ResponseStatus
 import com.submission.githubuser1.datasource.remote.response.User
 import com.submission.githubuser1.datasource.remote.response.UserDetail
-import com.submission.githubuser1.helper.handleRequestError
-import com.submission.githubuser1.helper.loadImage
-import com.submission.githubuser1.helper.visible
+import com.submission.githubuser1.helper.*
 import com.submission.githubuser1.repository.UserRepository
 import com.submission.githubuser1.view.adapter.UserFollowFragmentAdapter
 import com.submission.githubuser1.view.viewmodel.UserViewModel
@@ -28,6 +27,9 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding, UserViewModel
     }
 
     private var user: User? = null
+    private var userDetail: UserDetail? = null
+
+    private var isFavourite = false
 
     override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?) = FragmentUserDetailBinding.inflate(inflater, container, false)
     override fun getViewModel() = UserViewModel::class.java
@@ -43,6 +45,7 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding, UserViewModel
         super.onViewCreated(view, savedInstanceState)
         prepareUI()
         observeUserDetail()
+        observeFavourite()
     }
 
     private fun prepareUI() {
@@ -54,6 +57,11 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding, UserViewModel
 
             srlRefresh.setOnRefreshListener {
                 fetchData()
+            }
+
+            btnAddFavourite.setOnClickListener {
+                isFavourite = !isFavourite
+                setFavourite(isFavourite)
             }
         }
     }
@@ -74,6 +82,9 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding, UserViewModel
                 tvItemSubtitle.text = ("@${it.login}")
                 tvItemLocation.text = it.location ?: getString(R.string.text_not_available)
                 tvItemCompany.text = it.company ?: getString(R.string.text_not_available)
+
+                isFavourite = DataMapper.booleanMapper(it.isFavourite)
+                toggleFavourite(isFavourite)
             }
         }
     }
@@ -99,6 +110,7 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding, UserViewModel
                 }
                 is ResponseStatus.Success -> {
                     with(it.value) {
+                        userDetail = this
                         updateUI(this)
                         buildUserFollowSection(login)
                     }
@@ -133,6 +145,39 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding, UserViewModel
 
                 shimmerPlaceholder.root.visible(false)
                 userDetailContainer.visible(true)
+            }
+        }
+    }
+
+    private fun setFavourite(isFavourite: Boolean) {
+        userDetail?.let {
+            viewModel.setFavourite(it.id, isFavourite)
+        }
+    }
+
+    private fun observeFavourite() {
+        viewModel.isFavourite.observe(viewLifecycleOwner, {
+            when (it) {
+                is ResponseStatus.Success -> {
+                    toggleFavourite(it.value)
+                    when (it.value) {
+                        true -> requireView().snackBar(getString(R.string.text_added_to_favourite))
+                        false -> requireView().snackBar(getString(R.string.text_removed_from_favourite))
+                    }
+                }
+                else -> {
+                }
+            }
+        })
+    }
+
+    private fun toggleFavourite(isFavourite: Boolean) {
+        with(viewBinding) {
+            if (isFavourite) {
+                btnAddFavourite.setImageResource(R.drawable.ic_favourite_filled)
+                btnAddFavourite.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.colorFavourite))
+            } else {
+                btnAddFavourite.setImageResource(R.drawable.ic_favourite_border)
             }
         }
     }

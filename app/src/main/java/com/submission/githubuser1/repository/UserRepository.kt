@@ -2,6 +2,7 @@ package com.submission.githubuser1.repository
 
 import android.content.Context
 import com.submission.githubuser1.datasource.remote.response.*
+import com.submission.githubuser1.helper.DataMapper
 import com.submission.githubuser1.helper.DataUtils
 import com.submission.githubuser1.model.User
 
@@ -28,7 +29,17 @@ class UserRepository : BaseRepository() {
     }
 
     suspend fun userDetail(username: String): ResponseStatus<UserDetail> = safeApiCall {
-        remoteApi.detail(username)
+        val dao = appDB.getUserDetailDao()
+        val cache = dao.find(username)
+
+        if (cache != null) {
+            cache
+        } else {
+            val apiResult = remoteApi.detail(username)
+            dao.insert(apiResult)
+
+            apiResult
+        }
     }
 
     suspend fun userFollower(username: String): ResponseStatus<FollowResponse> = safeApiCall {
@@ -37,6 +48,13 @@ class UserRepository : BaseRepository() {
 
     suspend fun userFollowing(username: String): ResponseStatus<FollowResponse> = safeApiCall {
         remoteApi.following(username)
+    }
+
+    suspend fun setFavourite(key: Int, isFavourite: Boolean): ResponseStatus<Boolean> = safeApiCall {
+        val dao = appDB.getUserDetailDao()
+        dao.setFavourite(key, isFavourite)
+
+        DataMapper.booleanMapper(dao.isFavourite(key))
     }
 
 }

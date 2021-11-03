@@ -24,7 +24,8 @@
 
     <color name="colorSuccess" tools:keep="@color/colorSuccess">#1C8721</color>
     <color name="colorWarning" tools:keep="@color/colorWarning">#FDBE3B</color>
-    <color name="colorDanger" tools:keep="@color/colorDanger">#D32F2F</color>
+    <color name="colorDanger" tools:keep="@color/colorDanger">#C62828</color>
+    <color name="colorFavourite" tools:keep="@color/colorDanger">#FF8181</color>
 
     <color name="colorIconWhite100">#FFFFFF</color>
     <color name="colorIconBlack100" tools:keep="@color/colorIconBlack100">#000000</color>

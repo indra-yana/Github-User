@@ -18,4 +18,5 @@ abstract class BaseUserViewModel : ViewModel() {
     abstract fun userDetail(username: String): Job
     abstract fun userFollower(username: String): Job
     abstract fun userFollowing(username: String): Job
+    abstract fun setFavourite(key: Int, isFavourite: Boolean): Job
 }
