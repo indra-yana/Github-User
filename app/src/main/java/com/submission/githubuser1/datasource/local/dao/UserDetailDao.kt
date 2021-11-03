@@ -1,7 +1,7 @@
 package com.submission.githubuser1.datasource.local.dao
 
 import androidx.room.*
-import com.submission.githubuser1.datasource.remote.response.UserDetailResponse
+import com.submission.githubuser1.datasource.remote.response.UserDetail
 
 /****************************************************
  * Created by Indra Muliana
@@ -14,22 +14,22 @@ import com.submission.githubuser1.datasource.remote.response.UserDetailResponse
 interface UserDetailDao {
 
     @Query("SELECT * FROM user_details WHERE `id` = :key")
-    suspend fun find(key: String): UserDetailResponse?
+    suspend fun find(key: String): UserDetail?
 
     @Query("SELECT * FROM user_details")
-    suspend fun all(): List<UserDetailResponse>
+    suspend fun all(): List<UserDetail>
 
     @Query("SELECT * FROM user_details WHERE is_favourite = 1")
-    suspend fun getUserFavourite(): List<UserDetailResponse>
+    suspend fun getUserFavourite(): List<UserDetail>
 
     @Query("SELECT * FROM user_details WHERE `id` LIKE '%' || :key || '%' AND `name` LIKE '%' || :key || '%' AND is_favourite = 1")
-    suspend fun findUserFavourite(key: String): List<UserDetailResponse>
+    suspend fun findUserFavourite(key: String): List<UserDetail>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(value: UserDetailResponse)
+    suspend fun insert(value: UserDetail)
 
     @Delete
-    suspend fun delete(value: UserDetailResponse)
+    suspend fun delete(value: UserDetail)
 
     @Query("SELECT EXISTS (SELECT 1 FROM user_details WHERE `id` = :key)")
     suspend fun exist(key: String): Boolean

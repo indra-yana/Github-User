@@ -22,14 +22,14 @@ class UserViewModel(private val repository: UserRepository) : BaseUserViewModel(
     private val _users: MutableLiveData<ResponseStatus<UserResponse>> = MutableLiveData()
     private val _userList: MutableLiveData<ResponseStatus<MutableList<User>>> = MutableLiveData()
     private val _userSearch: MutableLiveData<ResponseStatus<UserSearchResponse>> = MutableLiveData()
-    private val _userDetail: MutableLiveData<ResponseStatus<UserDetailResponse>> = MutableLiveData()
+    private val _userDetail: MutableLiveData<ResponseStatus<UserDetail>> = MutableLiveData()
     private val _userFollower: MutableLiveData<ResponseStatus<FollowResponse>> = MutableLiveData()
     private val _userFollowing: MutableLiveData<ResponseStatus<FollowResponse>> = MutableLiveData()
 
     val users: LiveData<ResponseStatus<UserResponse>> = _users
     val userList: LiveData<ResponseStatus<MutableList<User>>> = _userList
     val userSearch: LiveData<ResponseStatus<UserSearchResponse>> = _userSearch
-    val userDetail: LiveData<ResponseStatus<UserDetailResponse>> = _userDetail
+    val userDetail: LiveData<ResponseStatus<UserDetail>> = _userDetail
     val userFollower: LiveData<ResponseStatus<FollowResponse>> = _userFollower
     val userFollowing: LiveData<ResponseStatus<FollowResponse>> = _userFollowing
 

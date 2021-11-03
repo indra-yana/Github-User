@@ -13,7 +13,7 @@ import com.submission.githubuser1.R
 import com.submission.githubuser1.databinding.FragmentUserDetailBinding
 import com.submission.githubuser1.datasource.remote.response.ResponseStatus
 import com.submission.githubuser1.datasource.remote.response.User
-import com.submission.githubuser1.datasource.remote.response.UserDetailResponse
+import com.submission.githubuser1.datasource.remote.response.UserDetail
 import com.submission.githubuser1.helper.handleRequestError
 import com.submission.githubuser1.helper.loadImage
 import com.submission.githubuser1.helper.visible
@@ -58,7 +58,7 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding, UserViewModel
         }
     }
 
-    private fun updateUI(userDetail: UserDetailResponse) {
+    private fun updateUI(userDetail: UserDetail) {
         with(viewBinding) {
             userDetail.let {
                 tvHeaderTitle.text = getString(R.string.text_profile)

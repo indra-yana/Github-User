@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "user_details", indices = [Index(value = ["id"], unique = true)])
-class UserDetailResponse(
+class UserDetail(
     @PrimaryKey
     @SerializedName("id")
     @ColumnInfo(name = "id")

@@ -27,7 +27,7 @@ class UserRepository : BaseRepository() {
         remoteApi.search(q)
     }
 
-    suspend fun userDetail(username: String): ResponseStatus<UserDetailResponse> = safeApiCall {
+    suspend fun userDetail(username: String): ResponseStatus<UserDetail> = safeApiCall {
         remoteApi.detail(username)
     }
 

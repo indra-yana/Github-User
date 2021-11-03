@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.submission.githubuser1.datasource.local.dao.UserDao
 import com.submission.githubuser1.datasource.local.dao.UserDetailDao
 import com.submission.githubuser1.datasource.remote.response.User
-import com.submission.githubuser1.datasource.remote.response.UserDetailResponse
+import com.submission.githubuser1.datasource.remote.response.UserDetail
 
 /****************************************************
  * Created by Indra Muliana
@@ -19,7 +19,7 @@ import com.submission.githubuser1.datasource.remote.response.UserDetailResponse
 @Database(
     entities = [
         User::class,
-        UserDetailResponse::class
+        UserDetail::class
     ],
     version = 1,
     exportSchema = false
