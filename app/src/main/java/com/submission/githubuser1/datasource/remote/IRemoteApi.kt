@@ -15,7 +15,7 @@ import retrofit2.http.Query
  * Github: https://github.com/indra-yana
  ****************************************************/
 
-interface IApiEndPoint {
+interface IRemoteApi {
 
     @GET("/users")
     suspend fun users(@Query("since") since: Int?, @Query("per_page") perPage: Int = 15): UserResponse

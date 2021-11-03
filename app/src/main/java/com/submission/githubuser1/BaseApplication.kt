@@ -2,8 +2,8 @@ package com.submission.githubuser1
 
 import android.app.Application
 import com.submission.githubuser1.datasource.local.AppDatabase
-import com.submission.githubuser1.datasource.remote.ApiClientConfig
-import com.submission.githubuser1.datasource.remote.IApiEndPoint
+import com.submission.githubuser1.datasource.remote.AppRemoteApi
+import com.submission.githubuser1.datasource.remote.IRemoteApi
 
 /****************************************************
  * Created by Indra Muliana
@@ -16,7 +16,7 @@ class BaseApplication : Application() {
 
     companion object {
         @JvmStatic
-        lateinit var remoteApi: IApiEndPoint
+        lateinit var remoteApi: IRemoteApi
 
         @JvmStatic
         lateinit var appDB: AppDatabase
@@ -25,7 +25,7 @@ class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        remoteApi = ApiClientConfig.initApi(IApiEndPoint::class.java)
+        remoteApi = AppRemoteApi.initApi(IRemoteApi::class.java)
         appDB = AppDatabase.initDatabase(this)
     }
 

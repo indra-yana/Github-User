@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
  * Github: https://github.com/indra-yana
  ****************************************************/
 
-object ApiClientConfig {
+object AppRemoteApi {
 
     private val retrofit: Retrofit
 
