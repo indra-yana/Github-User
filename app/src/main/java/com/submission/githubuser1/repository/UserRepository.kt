@@ -57,4 +57,11 @@ class UserRepository : BaseRepository() {
         DataMapper.booleanMapper(dao.isFavourite(key))
     }
 
+    suspend fun getFavourite(): ResponseStatus<UserResponse> = safeApiCall {
+        val dao = appDB.getUserDetailDao()
+        val dbResult = dao.getUserFavourite()
+
+        DataMapper.userDetailsToUsersMapper(dbResult)
+    }
+
 }

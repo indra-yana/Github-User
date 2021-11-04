@@ -71,4 +71,9 @@ class UserViewModel(private val repository: UserRepository) : BaseUserViewModel(
         _isFavourite.value = repository.setFavourite(key, isFavourite)
     }
 
+    override fun getFavourite() = viewModelScope.launch {
+        _users.value = ResponseStatus.Loading
+        _users.value = repository.getFavourite()
+    }
+
 }

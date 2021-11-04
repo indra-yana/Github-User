@@ -26,27 +26,12 @@ data class User(
     @ColumnInfo(name = "avatar_url")
     val avatarUrl: String,
 
-    @SerializedName("followers_url")
-    @ColumnInfo(name = "followers_url")
-    val followersUrl: String,
-
-    @SerializedName("following_url")
-    @ColumnInfo(name = "following_url")
-    val followingUrl: String,
-
     @SerializedName("repos_url")
     @ColumnInfo(name = "repos_url")
     val reposUrl: String,
 
-    @SerializedName("score")
-    @ColumnInfo(name = "score")
-    val score: Double?,
-
-    @SerializedName("type")
-    @ColumnInfo(name = "type")
-    val type: String,
-
     @SerializedName("url")
     @ColumnInfo(name = "url")
     val url: String
+
 ) : Parcelable

@@ -21,7 +21,7 @@ import com.submission.githubuser1.datasource.remote.response.UserDetail
         User::class,
         UserDetail::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 

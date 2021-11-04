@@ -1,5 +1,9 @@
 package com.submission.githubuser1.helper
 
+import com.submission.githubuser1.datasource.remote.response.User
+import com.submission.githubuser1.datasource.remote.response.UserDetail
+import com.submission.githubuser1.datasource.remote.response.UserResponse
+
 /****************************************************
  * Created by Indra Muliana
  * On Wednesday, 03/11/2021 22.11
@@ -8,6 +12,23 @@ package com.submission.githubuser1.helper
  ****************************************************/
 
 object DataMapper {
+    fun userDetailsToUsersMapper(data: List<UserDetail>): UserResponse {
+        val arrList = UserResponse()
+        data.map {
+            arrList.add(
+                User(
+                    id = it.id,
+                    login = it.login,
+                    avatarUrl = it.avatarUrl,
+                    url = it.url,
+                    reposUrl = "",
+                )
+            )
+        }
+
+        return arrList
+    }
+
     fun booleanMapper(data: Int): Boolean {
         return data == 1
     }
