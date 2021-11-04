@@ -12,6 +12,7 @@ import com.submission.githubuser1.databinding.FragmentHomeBinding
 import com.submission.githubuser1.datasource.remote.response.ResponseStatus
 import com.submission.githubuser1.datasource.remote.response.User
 import com.submission.githubuser1.helper.handleRequestError
+import com.submission.githubuser1.helper.snackBar
 import com.submission.githubuser1.helper.visible
 import com.submission.githubuser1.listener.IOnItemClickListener
 import com.submission.githubuser1.repository.UserRepository
@@ -55,6 +56,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
 
             srlRefresh.setOnRefreshListener {
                 fetchData()
+            }
+
+            fabFavourite.setOnClickListener {
+                requireView().snackBar(msg = "Coming Soon!", anchor = it)
             }
         }
     }

@@ -1,70 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/srlRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.fragment.HomeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/mainContainer"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srlRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/layoutHeader"
-            layout="@layout/layout_header" />
-
-        <TextView
-            android:id="@+id/tvHeaderSubtitle"
-            style="@style/Header.H4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="?actionBarSize"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:elevation="@dimen/_5sdp"
-            android:text="@string/text_find_your_favourite_dev"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/shimmerContainer"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainContainer"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_6sdp"
-            android:elevation="@dimen/_5sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvHeaderSubtitle"
-            app:shimmer_base_alpha="0.6"
-            app:shimmer_highlight_alpha="0.3">
+            android:layout_height="match_parent">
 
             <include
-                android:id="@+id/shimmerPlaceholder"
-                layout="@layout/fragment_home_placeholder"
-                android:elevation="@dimen/_5sdp"
-                android:visibility="invisible" />
+                android:id="@+id/layoutHeader"
+                layout="@layout/layout_header" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvUser"
+            <TextView
+                android:id="@+id/tvHeaderSubtitle"
+                style="@style/Header.H4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="?actionBarSize"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:elevation="@dimen/_5sdp"
+                android:text="@string/text_find_your_favourite_dev"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerContainer"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_6sdp"
                 android:elevation="@dimen/_5sdp"
-                android:orientation="vertical"
-                android:paddingTop="@dimen/_10sdp"
-                android:paddingStart="@dimen/_4sdp"
-                android:paddingEnd="@dimen/_4sdp"
-                android:paddingBottom="?actionBarSize"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_card_user" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvHeaderSubtitle"
+                app:shimmer_base_alpha="0.6"
+                app:shimmer_highlight_alpha="0.3">
 
-        </com.facebook.shimmer.ShimmerFrameLayout>
+                <include
+                    android:id="@+id/shimmerPlaceholder"
+                    layout="@layout/fragment_home_placeholder"
+                    android:elevation="@dimen/_5sdp"
+                    android:visibility="invisible" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:elevation="@dimen/_5sdp"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/_4sdp"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_4sdp"
+                    android:paddingBottom="?actionBarSize"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_card_user" />
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabFavourite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:clickable="true"
+        android:elevation="@dimen/_5sdp"
+        android:focusable="true"
+        android:src="@drawable/ic_favourite_filled"
+        app:backgroundTint="@color/secondaryColor"
+        app:fabCustomSize="@dimen/_35sdp"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        app:tint="@color/colorIconWhite100" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
