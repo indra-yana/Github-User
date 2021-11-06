@@ -56,6 +56,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
 
             srlRefresh.setOnRefreshListener {
                 fetchData()
+                adapter.clearData()
             }
 
             fabFavourite.setOnClickListener {
@@ -95,6 +96,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
     private fun observeUserList() {
         viewModel.users.observe(viewLifecycleOwner, {
             toggleLoading(it is ResponseStatus.Loading)
+            toggleNoData(it is ResponseStatus.Failure)
 
             when (it) {
                 is ResponseStatus.Loading -> {
@@ -102,6 +104,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
                 }
                 is ResponseStatus.Success -> {
                     adapter.bindData(it.value)
+                    toggleNoData(it.value.isNullOrEmpty())
                     Log.d(TAG, "observeUserList: Success!")
                 }
                 is ResponseStatus.Failure -> {
@@ -134,4 +137,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
         }
     }
 
+    private fun toggleNoData(isEmpty: Boolean) {
+        viewBinding.tvNoData.visible(isEmpty)
+    }
 }

@@ -2,6 +2,8 @@ package com.submission.githubuser1.view.fragment
 
 import android.content.res.Resources
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -82,6 +84,10 @@ class FavouriteFragment : BaseBottomSheetDialogFragment<FragmentFavouriteDialogB
                     adapter.onItemRemoved(position) {
                         viewModel.setFavourite(it.id, false)
                         Toast.makeText(requireContext(), "${it.login} removed from favourite!", Toast.LENGTH_SHORT).show()
+
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            toggleNoData(adapter.itemCount == 0)
+                        }, 500)
                     }
                 }
             }
@@ -106,6 +112,7 @@ class FavouriteFragment : BaseBottomSheetDialogFragment<FragmentFavouriteDialogB
     private fun observeUserList() {
         viewModel.users.observe(viewLifecycleOwner, {
             toggleLoading(it is ResponseStatus.Loading)
+            toggleNoData(it is ResponseStatus.Failure)
 
             when (it) {
                 is ResponseStatus.Loading -> {
@@ -113,6 +120,7 @@ class FavouriteFragment : BaseBottomSheetDialogFragment<FragmentFavouriteDialogB
                 }
                 is ResponseStatus.Success -> {
                     adapter.bindData(it.value)
+                    toggleNoData(it.value.isNullOrEmpty())
                     Log.d(TAG, "observeUserList: Success!")
                 }
                 is ResponseStatus.Failure -> {
@@ -144,19 +152,7 @@ class FavouriteFragment : BaseBottomSheetDialogFragment<FragmentFavouriteDialogB
         }
     }
 
-
-//    @Suppress("UNCHECKED_CAST")
-//    override fun <VB> getViewBinding(inflater: LayoutInflater, container: ViewGroup?) : VB {
-//        return FragmentFavouriteDialogBinding.inflate(inflater, container, false) as VB
-//    }
-//
-//    @Suppress("UNCHECKED_CAST")
-//    override fun <VM> getViewModel(): VM {
-//        return UserViewModel::class.java as VM
-//    }
-//
-//    @Suppress("UNCHECKED_CAST")
-//    override fun <BR> getRepository(): BR {
-//        return UserRepository() as BR
-//    }
+    private fun toggleNoData(isEmpty: Boolean) {
+        viewBinding.tvNoData.visible(isEmpty)
+    }
 }

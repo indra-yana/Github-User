@@ -21,6 +21,21 @@
                 layout="@layout/layout_header" />
 
             <TextView
+                android:id="@+id/tvNoData"
+                style="@style/Header.H5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_gravity="center"
+                android:elevation="@dimen/_5sdp"
+                android:visibility="gone"
+                android:textColor="@color/colorTextBlack100"
+                app:layout_constraintTop_toBottomOf="@+id/layoutHeader"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/text_no_data_found" />
+
+            <TextView
                 android:id="@+id/tvHeaderSubtitle"
                 style="@style/Header.H4"
                 android:layout_width="0dp"

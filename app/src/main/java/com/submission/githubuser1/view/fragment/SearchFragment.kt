@@ -140,6 +140,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, UserViewModel, UserRe
     private fun observeUserSearch() {
         viewModel.userSearch.observe(viewLifecycleOwner, {
             toggleLoading(it is ResponseStatus.Loading)
+            toggleNoData(it is ResponseStatus.Failure)
 
             when (it) {
                 is ResponseStatus.Loading -> {
@@ -147,6 +148,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, UserViewModel, UserRe
                 }
                 is ResponseStatus.Success -> {
                     adapter.bindData(it.value.users)
+                    toggleNoData(it.value.users.isNullOrEmpty())
                     Log.d(TAG, "observeUserSearch: Success!")
                 }
                 is ResponseStatus.Failure -> {
@@ -179,4 +181,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, UserViewModel, UserRe
         }
     }
 
+    private fun toggleNoData(isEmpty: Boolean) {
+        viewBinding.tvNoData.visible(isEmpty)
+    }
 }
