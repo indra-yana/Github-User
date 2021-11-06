@@ -23,13 +23,17 @@ class UserAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var itemList: UserResponse = UserResponse()
     var iOnItemClickListener: IOnItemClickListener? = null
+    var enableRemove: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return UserViewHolder(ItemCardUserBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as BaseViewHolder).bindItem(itemList[position], iOnItemClickListener)
+        (holder as BaseViewHolder).apply {
+            enableBtnItemRemove = enableRemove
+            bindItem(itemList[position], iOnItemClickListener)
+        }
     }
 
     override fun getItemCount(): Int = itemList.size
@@ -47,5 +51,17 @@ class UserAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     fun clearData() {
         this.itemList.clear()
         notifyDataSetChanged()
+    }
+
+    fun onItemRemoved(position: Int, callback: ((user: User) -> Unit)? = null) {
+        if (position != RecyclerView.NO_POSITION) {
+            callback?.let {
+                it(itemList[position])
+            }
+
+            this.itemList.removeAt(position)
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, itemCount)
+        }
     }
 }

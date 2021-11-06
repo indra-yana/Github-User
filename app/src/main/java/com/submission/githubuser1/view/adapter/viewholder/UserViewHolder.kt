@@ -3,6 +3,7 @@ package com.submission.githubuser1.view.adapter.viewholder
 import com.submission.githubuser1.databinding.ItemCardUserBinding
 import com.submission.githubuser1.datasource.remote.response.User
 import com.submission.githubuser1.helper.loadImage
+import com.submission.githubuser1.helper.visible
 import com.submission.githubuser1.listener.IOnItemClickListener
 
 /****************************************************
@@ -23,6 +24,13 @@ class UserViewHolder(private val binding: ItemCardUserBinding) : BaseViewHolder(
 
             root.setOnClickListener {
                 listener?.onItemClicked(data, absoluteAdapterPosition)
+            }
+
+            if (enableBtnItemRemove) {
+                btnRemove.visible(true)
+                btnRemove.setOnClickListener {
+                    listener?.onButtonRemoveItemClicked(data, absoluteAdapterPosition)
+                }
             }
         }
     }

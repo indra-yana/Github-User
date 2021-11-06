@@ -18,6 +18,7 @@ import com.submission.githubuser1.datasource.remote.response.UserDetail
 import com.submission.githubuser1.helper.*
 import com.submission.githubuser1.repository.UserRepository
 import com.submission.githubuser1.view.adapter.UserFollowFragmentAdapter
+import com.submission.githubuser1.view.fragment.base.BaseFragment
 import com.submission.githubuser1.view.viewmodel.UserViewModel
 
 class UserDetailFragment : BaseFragment<FragmentUserDetailBinding, UserViewModel, UserRepository>() {

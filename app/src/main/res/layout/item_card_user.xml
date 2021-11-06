@@ -68,15 +68,29 @@
         style="@style/Text.Subtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:visibility="visible"
         android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
         android:layout_marginBottom="@dimen/_8sdp"
-        app:layout_constraintEnd_toEndOf="@+id/viewBackground"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/viewBackground"
+        app:layout_constraintEnd_toStartOf="@+id/btnRemove"
         app:layout_constraintStart_toStartOf="@+id/viewBackground"
         app:layout_constraintTop_toBottomOf="@id/ivItemThumbnail"
-        app:layout_constraintBottom_toBottomOf="@+id/viewBackground"
         tools:text="User URL" />
+
+    <ImageButton
+        android:id="@+id/btnRemove"
+        android:layout_width="@dimen/_23sdp"
+        android:layout_height="@dimen/_23sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_delete"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/tvUserLink"
+        app:layout_constraintEnd_toEndOf="@+id/viewBackground"
+        app:layout_constraintTop_toTopOf="@+id/tvUserLink"
+        app:tint="@color/colorDanger" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

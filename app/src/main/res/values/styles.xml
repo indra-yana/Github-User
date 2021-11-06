@@ -60,4 +60,19 @@
         <item name="android:maxLines">3</item>
     </style>
 
+    <style name="BottomSheetDialogTheme" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+
+    <style name="BottomSheetStyle" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Rounded</item>
+        <item name="android:background">@drawable/bg_layout_favourite</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.Rounded" parent="">
+        <item name="cornerSize">@dimen/_12sdp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
 </resources>

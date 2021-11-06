@@ -52,9 +52,7 @@ fun View.snackBar(
         anchor?.let {
             anchorView = it
         }
-
-        show()
-    }
+    }.show()
 }
 
 fun Fragment.handleRequestError(failure: ResponseStatus.Failure, action: (() -> Unit)? = null) {

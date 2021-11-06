@@ -1,13 +1,13 @@
-package com.submission.githubuser1.view.fragment
+package com.submission.githubuser1.view.fragment.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.submission.githubuser1.repository.BaseRepository
 import com.submission.githubuser1.view.viewmodel.ViewModelFactory
 
@@ -18,16 +18,20 @@ import com.submission.githubuser1.view.viewmodel.ViewModelFactory
  * Github: https://github.com/indra-yana
  ****************************************************/
 
-abstract class BaseFragment<VB : ViewBinding, VM: ViewModel, BR: BaseRepository> : Fragment() {
+abstract class BaseBottomSheetDialogFragment<VB : ViewBinding, VM: ViewModel, BR: BaseRepository> :
+    BottomSheetDialogFragment(),
+    FragmentContract<VB, VM, BR>
+{
 
     private var _viewBinding: VB? = null
+    private var _viewModel: VM? = null
 
-    protected val viewBinding get() = _viewBinding!!
-    protected lateinit var viewModel: VM
+    override val viewBinding get() = _viewBinding!!
+    override val viewModel get() = _viewModel!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this, ViewModelFactory(getRepository()))[getViewModel()]
+        _viewModel = ViewModelProvider(this, ViewModelFactory(getRepository()))[getViewModel()]
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -40,7 +44,4 @@ abstract class BaseFragment<VB : ViewBinding, VM: ViewModel, BR: BaseRepository>
         _viewBinding = null
     }
 
-    abstract fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
-    abstract fun getViewModel(): Class<VM>
-    abstract fun getRepository(): BR
 }

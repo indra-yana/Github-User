@@ -13,5 +13,8 @@ import com.submission.githubuser1.listener.IOnItemClickListener
  ****************************************************/
 
 abstract class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    var enableBtnItemRemove: Boolean = false
+
     abstract fun bindItem(data: User, listener: IOnItemClickListener?)
 }

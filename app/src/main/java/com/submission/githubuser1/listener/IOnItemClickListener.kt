@@ -12,4 +12,5 @@ import com.submission.githubuser1.datasource.remote.response.User
 
 interface IOnItemClickListener {
     fun onItemClicked(data: User, position: Int)
+    fun onButtonRemoveItemClicked(data: User, position: Int) { }
 }

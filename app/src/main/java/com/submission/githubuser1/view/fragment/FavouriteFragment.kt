@@ -1,14 +1,18 @@
 package com.submission.githubuser1.view.fragment
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.submission.githubuser1.R
-import com.submission.githubuser1.databinding.FragmentHomeBinding
+import com.submission.githubuser1.databinding.FragmentFavouriteDialogBinding
 import com.submission.githubuser1.datasource.remote.response.ResponseStatus
 import com.submission.githubuser1.datasource.remote.response.User
 import com.submission.githubuser1.helper.handleRequestError
@@ -16,64 +20,69 @@ import com.submission.githubuser1.helper.visible
 import com.submission.githubuser1.listener.IOnItemClickListener
 import com.submission.githubuser1.repository.UserRepository
 import com.submission.githubuser1.view.adapter.UserAdapter
-import com.submission.githubuser1.view.fragment.base.BaseFragment
+import com.submission.githubuser1.view.fragment.base.BaseBottomSheetDialogFragment
 import com.submission.githubuser1.view.viewmodel.UserViewModel
-import kotlin.random.Random
 
-class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserRepository>() {
+class FavouriteFragment : BaseBottomSheetDialogFragment<FragmentFavouriteDialogBinding, UserViewModel, UserRepository>() {
 
     companion object {
-        private val TAG = this::class.java.simpleName
+        val TAG: String = this::class.java.simpleName
     }
 
     private lateinit var adapter: UserAdapter
-    private var initialPage: Int = Random.nextInt(1, 100)
-    private var perPage: Int = 20
 
-    override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?) = FragmentHomeBinding.inflate(inflater, container, false)
+    override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?) = FragmentFavouriteDialogBinding.inflate(inflater, container, false)
     override fun getViewModel() = UserViewModel::class.java
     override fun getRepository() = UserRepository()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fetchData()
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.BottomSheetDialogTheme)
+
+        // fetchData()
         initAdapter()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        view.minimumHeight = Resources.getSystem().displayMetrics.heightPixels
+
+        val bottomSheetBehavior = BottomSheetBehavior.from(view.parent as View)
+        bottomSheetBehavior.apply {
+            peekHeight = BottomSheetBehavior.PEEK_HEIGHT_AUTO
+            state = BottomSheetBehavior.STATE_HALF_EXPANDED
+        }
+
         prepareUI()
         buildUserListRV()
         observeUserList()
+
+        fetchData()
     }
 
     private fun prepareUI() {
         with(viewBinding) {
-            layoutHeader.tvHeaderTitle.text = getString(R.string.text_home_title)
-            layoutHeader.ivHeaderSearch.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
-            }
+            tvBottomSheetTitle.text = getString(R.string.text_favourite)
 
-            srlRefresh.setOnRefreshListener {
-                fetchData()
-            }
-
-            fabFavourite.setOnClickListener {
-                favouriteBottomSheet()
+            btnClose.setOnClickListener {
+                dismiss()
             }
         }
     }
 
-    private fun favouriteBottomSheet() {
-        val favouriteBottomSheet = FavouriteFragment()
-        favouriteBottomSheet.show(requireActivity().supportFragmentManager, FavouriteFragment.TAG)
-    }
-
     private fun initAdapter() {
         adapter = UserAdapter().apply {
+            enableRemove = true
             iOnItemClickListener = object : IOnItemClickListener {
                 override fun onItemClicked(data: User, position: Int) {
                     gotoDetail(data)
+                }
+
+                override fun onButtonRemoveItemClicked(data: User, position: Int) {
+                    super.onButtonRemoveItemClicked(data, position)
+                    adapter.onItemRemoved(position) {
+                        viewModel.setFavourite(it.id, false)
+                        Toast.makeText(requireContext(), "${it.login} removed from favourite!", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
@@ -88,6 +97,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
     }
 
     private fun gotoDetail(user: User) {
+        dismiss()
+
         val directions = HomeFragmentDirections.actionHomeFragmentToUserDetailFragment(user)
         findNavController().navigate(directions)
     }
@@ -113,12 +124,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
     }
 
     private fun fetchData() {
-        viewModel.userList(initialPage, perPage)
+        viewModel.getFavourite()
     }
 
     private fun toggleLoading(isLoading: Boolean) {
         with(viewBinding) {
-            srlRefresh.isRefreshing = isLoading
             shimmerContainer.showShimmer(isLoading)
 
             if (isLoading) {
@@ -134,4 +144,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
         }
     }
 
+
+//    @Suppress("UNCHECKED_CAST")
+//    override fun <VB> getViewBinding(inflater: LayoutInflater, container: ViewGroup?) : VB {
+//        return FragmentFavouriteDialogBinding.inflate(inflater, container, false) as VB
+//    }
+//
+//    @Suppress("UNCHECKED_CAST")
+//    override fun <VM> getViewModel(): VM {
+//        return UserViewModel::class.java as VM
+//    }
+//
+//    @Suppress("UNCHECKED_CAST")
+//    override fun <BR> getRepository(): BR {
+//        return UserRepository() as BR
+//    }
 }

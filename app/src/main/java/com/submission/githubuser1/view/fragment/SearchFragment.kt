@@ -19,6 +19,7 @@ import com.submission.githubuser1.helper.visible
 import com.submission.githubuser1.listener.IOnItemClickListener
 import com.submission.githubuser1.repository.UserRepository
 import com.submission.githubuser1.view.adapter.UserAdapter
+import com.submission.githubuser1.view.fragment.base.BaseFragment
 import com.submission.githubuser1.view.viewmodel.UserViewModel
 import java.util.*
 
