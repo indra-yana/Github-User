@@ -26,16 +26,30 @@
         android:id="@+id/ivHeaderSearch"
         android:layout_width="@dimen/_25sdp"
         android:layout_height="@dimen/_25sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
         android:background="@android:color/transparent"
         android:clipToPadding="false"
         android:contentDescription="@string/app_name"
         android:foreground="?selectableItemBackgroundBorderless"
         android:src="@drawable/ic_search"
         app:layout_constraintBottom_toBottomOf="@+id/tvHeaderTitle"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/switchTheme"
         app:layout_constraintStart_toEndOf="@+id/tvHeaderTitle"
         app:layout_constraintTop_toTopOf="@+id/tvHeaderTitle"
-        app:tint="@color/colorPrimaryWhite100" />
+        app:tint="@color/colorIconWhite100" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switchTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:checked="false"
+        android:thumb="@drawable/ic_wb_sunny"
+        app:layout_constraintBottom_toBottomOf="@+id/ivHeaderSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivHeaderSearch"
+        app:thumbTint="@drawable/switch_color"
+        app:useMaterialThemeColors="false" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

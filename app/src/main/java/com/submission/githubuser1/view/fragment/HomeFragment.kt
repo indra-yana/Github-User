@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.submission.githubuser1.R
@@ -61,6 +62,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
 
             fabFavourite.setOnClickListener {
                 favouriteBottomSheet()
+            }
+
+            layoutHeader.switchTheme.setOnCheckedChangeListener { _, isChecked ->
+                AppCompatDelegate.setDefaultNightMode( if (isChecked) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO )
             }
         }
     }

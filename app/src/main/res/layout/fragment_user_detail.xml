@@ -62,7 +62,7 @@
                     android:foreground="?selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_favourite_border"
                     android:visibility="visible"
-                    app:tint="@color/colorPrimaryWhite100" />
+                    app:tint="@color/colorIconWhite100" />
 
             </LinearLayout>
 
@@ -256,7 +256,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shimmerContainer"
-            app:tabIndicatorColor="@color/colorPrimaryWhite100"
+            app:tabIndicatorColor="@color/colorIconWhite100"
             app:tabTextColor="@android:color/white" />
 
         <androidx.viewpager2.widget.ViewPager2
