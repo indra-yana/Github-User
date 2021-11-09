@@ -6,10 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.submission.githubuser1.BaseApplication
 import com.submission.githubuser1.R
 import com.submission.githubuser1.databinding.FragmentHomeBinding
+import com.submission.githubuser1.datasource.local.AppPreferences
 import com.submission.githubuser1.datasource.remote.response.ResponseStatus
 import com.submission.githubuser1.datasource.remote.response.User
 import com.submission.githubuser1.helper.handleRequestError
@@ -19,6 +23,7 @@ import com.submission.githubuser1.repository.UserRepository
 import com.submission.githubuser1.view.adapter.UserAdapter
 import com.submission.githubuser1.view.fragment.base.BaseFragment
 import com.submission.githubuser1.view.viewmodel.UserViewModel
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserRepository>() {
@@ -30,6 +35,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
     private lateinit var adapter: UserAdapter
     private var initialPage: Int = Random.nextInt(1, 100)
     private var perPage: Int = 20
+
+    private val pref: AppPreferences by lazy { BaseApplication.pref }
 
     override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?) = FragmentHomeBinding.inflate(inflater, container, false)
     override fun getViewModel() = UserViewModel::class.java
@@ -65,8 +72,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
             }
 
             layoutHeader.switchTheme.setOnCheckedChangeListener { _, isChecked ->
-                AppCompatDelegate.setDefaultNightMode( if (isChecked) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO )
+                lifecycleScope.launch {
+                    pref.saveThemeSetting(isChecked)
+                }
             }
+
+            pref.getThemeSetting().asLiveData().observe(viewLifecycleOwner, { isChecked ->
+                layoutHeader.switchTheme.isChecked = isChecked
+                AppCompatDelegate.setDefaultNightMode( if (isChecked) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO )
+            })
         }
     }
 
