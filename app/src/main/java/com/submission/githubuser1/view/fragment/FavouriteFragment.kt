@@ -61,13 +61,11 @@ class FavouriteFragment : BaseBottomSheetDialogFragment<FragmentFavouriteDialogB
         fetchData()
     }
 
-    private fun prepareUI() {
-        with(viewBinding) {
-            tvBottomSheetTitle.text = getString(R.string.text_favourite)
+    private fun prepareUI() = with(viewBinding) {
+        tvBottomSheetTitle.text = getString(R.string.text_favourite)
 
-            btnClose.setOnClickListener {
-                dismiss()
-            }
+        btnClose.setOnClickListener {
+            dismiss()
         }
     }
 
@@ -94,12 +92,10 @@ class FavouriteFragment : BaseBottomSheetDialogFragment<FragmentFavouriteDialogB
         }
     }
 
-    private fun buildUserListRV() {
-        with(viewBinding) {
-            rvUser.adapter = adapter
-            rvUser.layoutManager = LinearLayoutManager(requireContext())
-            rvUser.setHasFixedSize(true)
-        }
+    private fun buildUserListRV() = with(viewBinding) {
+        rvUser.adapter = adapter
+        rvUser.layoutManager = LinearLayoutManager(requireContext())
+        rvUser.setHasFixedSize(true)
     }
 
     private fun gotoDetail(user: User) {
@@ -135,20 +131,18 @@ class FavouriteFragment : BaseBottomSheetDialogFragment<FragmentFavouriteDialogB
         viewModel.getFavourite()
     }
 
-    private fun toggleLoading(isLoading: Boolean) {
-        with(viewBinding) {
-            shimmerContainer.showShimmer(isLoading)
+    private fun toggleLoading(isLoading: Boolean) = with(viewBinding) {
+        shimmerContainer.showShimmer(isLoading)
 
-            if (isLoading) {
-                shimmerPlaceholder.root.visible(true)
-                rvUser.visible(false)
-            } else {
-                shimmerContainer.stopShimmer()
-                shimmerContainer.hideShimmer()
+        if (isLoading) {
+            shimmerPlaceholder.root.visible(true)
+            rvUser.visible(false)
+        } else {
+            shimmerContainer.stopShimmer()
+            shimmerContainer.hideShimmer()
 
-                shimmerPlaceholder.root.visible(false)
-                rvUser.visible(true)
-            }
+            shimmerPlaceholder.root.visible(false)
+            rvUser.visible(true)
         }
     }
 

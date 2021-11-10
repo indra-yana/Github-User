@@ -65,37 +65,35 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
         observeUserList()
     }
 
-    private fun prepareUI() {
-        with(viewBinding) {
-            layoutHeader.tvHeaderTitle.text = getString(R.string.text_home_title)
-            layoutHeader.ivHeaderSearch.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
-            }
-
-            srlRefresh.setOnRefreshListener {
-                isLoading = false
-                isNetworkError = false
-                isRequestNextPage = false
-
-                fetchData(nextPage)
-                // adapter.clearData()
-            }
-
-            fabFavourite.setOnClickListener {
-                favouriteBottomSheet()
-            }
-
-            layoutHeader.switchTheme.setOnCheckedChangeListener { _, isChecked ->
-                lifecycleScope.launch {
-                    pref.saveThemeSetting(isChecked)
-                }
-            }
-
-            pref.getThemeSetting().asLiveData().observe(viewLifecycleOwner, { isChecked ->
-                layoutHeader.switchTheme.isChecked = isChecked
-                AppCompatDelegate.setDefaultNightMode( if (isChecked) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO )
-            })
+    private fun prepareUI() = with(viewBinding) {
+        layoutHeader.tvHeaderTitle.text = getString(R.string.text_home_title)
+        layoutHeader.ivHeaderSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
         }
+
+        srlRefresh.setOnRefreshListener {
+            isLoading = false
+            isNetworkError = false
+            isRequestNextPage = false
+
+            fetchData(nextPage)
+            // adapter.clearData()
+        }
+
+        fabFavourite.setOnClickListener {
+            favouriteBottomSheet()
+        }
+
+        layoutHeader.switchTheme.setOnCheckedChangeListener { _, isChecked ->
+            lifecycleScope.launch {
+                pref.saveThemeSetting(isChecked)
+            }
+        }
+
+        pref.getThemeSetting().asLiveData().observe(viewLifecycleOwner, { isChecked ->
+            layoutHeader.switchTheme.isChecked = isChecked
+            AppCompatDelegate.setDefaultNightMode(if (isChecked) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO)
+        })
     }
 
     private fun favouriteBottomSheet() {
@@ -113,47 +111,43 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
         }
     }
 
-    private fun buildUserListRV() {
-        with(viewBinding) {
-            rvUser.adapter = adapter
-            rvUser.layoutManager = LinearLayoutManager(requireContext())
-            rvUser.setHasFixedSize(true)
-            rvUser.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    super.onScrollStateChanged(recyclerView, newState)
+    private fun buildUserListRV() = with(viewBinding) {
+        rvUser.adapter = adapter
+        rvUser.layoutManager = LinearLayoutManager(requireContext())
+        rvUser.setHasFixedSize(true)
+        rvUser.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val visibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
+
+                if (visibleItem > -1) {
+                    lastVisibleItem = visibleItem
                 }
 
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
+                // Scroll down
+                if (!recyclerView.canScrollVertically(1)) {
+                    if (!isLoading) {
+                        isRequestNextPage = true
 
-                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                    val visibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
-
-                    if (visibleItem > -1) {
-                        lastVisibleItem = visibleItem
-                    }
-
-                    // Scroll down
-                    if (!recyclerView.canScrollVertically(1)) {
-                        if (!isLoading) {
-                            isRequestNextPage = true
-
-                            if (!isNetworkError) {
-                                nextPage += perPage
-                            }
-
-                            fetchData(nextPage)
-                            Log.d(TAG, "onScrolled: nextPage: $nextPage")
+                        if (!isNetworkError) {
+                            nextPage += perPage
                         }
-                    }
 
-                    // Scroll up
-                    if (recyclerView.canScrollVertically(-1)) {
-                        // isNetworkError = false
+                        fetchData(nextPage)
+                        Log.d(TAG, "onScrolled: nextPage: $nextPage")
                     }
                 }
-            })
-        }
+
+                // Scroll up
+                /*
+                if (recyclerView.canScrollVertically(-1)) {
+                    // isNetworkError = false
+                }
+                */
+            }
+        })
     }
 
     private fun gotoDetail(user: User) {
@@ -191,22 +185,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
         viewModel.userList(page, perPage)
     }
 
-    private fun toggleLoading(isLoading: Boolean) {
-        with(viewBinding) {
-            srlRefresh.isRefreshing = isLoading
-            shimmerContainer.showShimmer(isLoading)
+    private fun toggleLoading(isLoading: Boolean) = with(viewBinding) {
+        srlRefresh.isRefreshing = isLoading
+        shimmerContainer.showShimmer(isLoading)
 
-            if (isLoading) {
-                shimmerPlaceholder.root.visible(true)
-                rvUser.visible(false)
-            } else {
-                shimmerContainer.stopShimmer()
-                shimmerContainer.hideShimmer()
+        if (isLoading) {
+            shimmerPlaceholder.root.visible(true)
+            rvUser.visible(false)
+        } else {
+            shimmerContainer.stopShimmer()
+            shimmerContainer.hideShimmer()
 
-                shimmerPlaceholder.root.visible(false)
-                rvUser.visible(true)
-            }
+            shimmerPlaceholder.root.visible(false)
+            rvUser.visible(true)
         }
+
     }
 
     private fun toggleNoData(isEmpty: Boolean) {

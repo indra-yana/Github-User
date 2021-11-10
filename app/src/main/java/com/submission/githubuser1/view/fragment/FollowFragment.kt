@@ -57,12 +57,10 @@ class FollowFragment : BaseFragment<FragmentFollowBinding, UserViewModel, UserRe
         }
     }
 
-    private fun buildUserFollowRV() {
-        with(viewBinding) {
-            rvUser.adapter = adapter
-            rvUser.layoutManager = LinearLayoutManager(requireContext())
-            rvUser.setHasFixedSize(true)
-        }
+    private fun buildUserFollowRV() = with(viewBinding) {
+        rvUser.adapter = adapter
+        rvUser.layoutManager = LinearLayoutManager(requireContext())
+        rvUser.setHasFixedSize(true)
     }
 
     private fun observeUserFollow() {
@@ -117,20 +115,18 @@ class FollowFragment : BaseFragment<FragmentFollowBinding, UserViewModel, UserRe
         }
     }
 
-    private fun toggleLoading(isLoading: Boolean) {
-        with(viewBinding) {
-            shimmerContainer.showShimmer(isLoading)
+    private fun toggleLoading(isLoading: Boolean) = with(viewBinding) {
+        shimmerContainer.showShimmer(isLoading)
 
-            if (isLoading) {
-                shimmerPlaceholder.root.visible(true)
-                rvUser.visible(false)
-            } else {
-                shimmerContainer.stopShimmer()
-                shimmerContainer.hideShimmer()
+        if (isLoading) {
+            shimmerPlaceholder.root.visible(true)
+            rvUser.visible(false)
+        } else {
+            shimmerContainer.stopShimmer()
+            shimmerContainer.hideShimmer()
 
-                shimmerPlaceholder.root.visible(false)
-                rvUser.visible(true)
-            }
+            shimmerPlaceholder.root.visible(false)
+            rvUser.visible(true)
         }
     }
 

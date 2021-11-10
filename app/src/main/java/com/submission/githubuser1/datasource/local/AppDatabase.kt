@@ -36,10 +36,6 @@ abstract class AppDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        @JvmStatic
-        val dbInstance
-            get() = INSTANCE
-
         fun initDatabase(context: Context): AppDatabase {
             // if the INSTANCE is not null, then return it,
             // if it is, then create the database

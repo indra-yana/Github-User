@@ -54,57 +54,54 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, UserViewModel, UserRe
         observeUserSearch()
     }
 
-    private fun prepareUI() {
-        with(viewBinding) {
-            btnBack.setOnClickListener {
-                showInputMethod(false)
-                findNavController().navigateUp()
-            }
+    private fun prepareUI() = with(viewBinding) {
+        btnBack.setOnClickListener {
+            showInputMethod(false)
+            findNavController().navigateUp()
+        }
 
-            val searchManager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
-            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    query?.let {
-                        if (currentSearchQuery == query) {
-                            return false
-                        }
-
-                        doSearch(query)
-                        showInputMethod(false)
-
-                        currentSearchQuery = query
-                        return true
+        val searchManager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    if (currentSearchQuery == query) {
+                        return false
                     }
 
-                    return false
+                    doSearch(query)
+                    showInputMethod(false)
+
+                    currentSearchQuery = query
+                    return true
                 }
 
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    if (newText.isNullOrEmpty()) {
-                        adapter.clearData()
-                        return true
-                    }
+                return false
+            }
 
-                    return false
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText.isNullOrEmpty()) {
+                    adapter.clearData()
+                    return true
                 }
-            })
 
-            searchView.requestFocus()
-            searchView.setOnQueryTextFocusChangeListener { _, show ->
-                // TODO: handle Inputmethod method correctly
-                showInputMethod(show)
+                return false
             }
-            searchView.setOnCloseListener {
-                adapter.clearData()
-                return@setOnCloseListener true
-            }
+        })
 
-            srlRefresh.setOnRefreshListener {
-                adapter.clearData()
-                doSearch(currentSearchQuery)
-            }
+        searchView.requestFocus()
+        searchView.setOnQueryTextFocusChangeListener { _, show ->
+            // TODO: handle Inputmethod method correctly
+            showInputMethod(show)
+        }
+        searchView.setOnCloseListener {
+            adapter.clearData()
+            return@setOnCloseListener true
+        }
 
+        srlRefresh.setOnRefreshListener {
+            adapter.clearData()
+            doSearch(currentSearchQuery)
         }
     }
 
@@ -124,12 +121,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, UserViewModel, UserRe
         findNavController().navigate(directions)
     }
 
-    private fun buildUserListRV() {
-        with(viewBinding) {
-            rvUser.adapter = adapter
-            rvUser.layoutManager = LinearLayoutManager(requireContext())
-            rvUser.setHasFixedSize(true)
-        }
+    private fun buildUserListRV() = with(viewBinding) {
+        rvUser.adapter = adapter
+        rvUser.layoutManager = LinearLayoutManager(requireContext())
+        rvUser.setHasFixedSize(true)
     }
 
     private fun showInputMethod(show: Boolean) {
@@ -163,21 +158,19 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, UserViewModel, UserRe
         viewModel.userSearch(q)
     }
 
-    private fun toggleLoading(isLoading: Boolean) {
-        with(viewBinding) {
-            srlRefresh.isRefreshing = isLoading
-            shimmerContainer.showShimmer(isLoading)
+    private fun toggleLoading(isLoading: Boolean) = with(viewBinding) {
+        srlRefresh.isRefreshing = isLoading
+        shimmerContainer.showShimmer(isLoading)
 
-            if (isLoading) {
-                shimmerPlaceholder.root.visible(true)
-                rvUser.visible(false)
-            } else {
-                shimmerContainer.stopShimmer()
-                shimmerContainer.hideShimmer()
+        if (isLoading) {
+            shimmerPlaceholder.root.visible(true)
+            rvUser.visible(false)
+        } else {
+            shimmerContainer.stopShimmer()
+            shimmerContainer.hideShimmer()
 
-                shimmerPlaceholder.root.visible(false)
-                rvUser.visible(true)
-            }
+            shimmerPlaceholder.root.visible(false)
+            rvUser.visible(true)
         }
     }
 

@@ -49,44 +49,40 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding, UserViewModel
         observeFavourite()
     }
 
-    private fun prepareUI() {
-        with(viewBinding) {
+    private fun prepareUI() = with(viewBinding) {
+        tvHeaderTitle.text = getString(R.string.text_profile)
+        btnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        srlRefresh.setOnRefreshListener {
+            fetchData()
+        }
+
+        btnAddFavourite.setOnClickListener {
+            isFavourite = !isFavourite
+            setFavourite(isFavourite)
+        }
+    }
+
+    private fun updateUI(userDetail: UserDetail) = with(viewBinding) {
+        userDetail.let {
             tvHeaderTitle.text = getString(R.string.text_profile)
             btnBack.setOnClickListener {
                 findNavController().navigateUp()
             }
 
-            srlRefresh.setOnRefreshListener {
-                fetchData()
-            }
+            ivAvatar.loadImage(it.avatarUrl)
+            tvRepositoryCount.text = it.publicRepos.toString()
+            tvFollowersCount.text = it.followers.toString()
+            tvFollowingCount.text = it.following.toString()
+            tvItemTitle.text = it.name
+            tvItemSubtitle.text = ("@${it.login}")
+            tvItemLocation.text = it.location ?: getString(R.string.text_not_available)
+            tvItemCompany.text = it.company ?: getString(R.string.text_not_available)
 
-            btnAddFavourite.setOnClickListener {
-                isFavourite = !isFavourite
-                setFavourite(isFavourite)
-            }
-        }
-    }
-
-    private fun updateUI(userDetail: UserDetail) {
-        with(viewBinding) {
-            userDetail.let {
-                tvHeaderTitle.text = getString(R.string.text_profile)
-                btnBack.setOnClickListener {
-                    findNavController().navigateUp()
-                }
-
-                ivAvatar.loadImage(it.avatarUrl)
-                tvRepositoryCount.text = it.publicRepos.toString()
-                tvFollowersCount.text = it.followers.toString()
-                tvFollowingCount.text = it.following.toString()
-                tvItemTitle.text = it.name
-                tvItemSubtitle.text = ("@${it.login}")
-                tvItemLocation.text = it.location ?: getString(R.string.text_not_available)
-                tvItemCompany.text = it.company ?: getString(R.string.text_not_available)
-
-                isFavourite = DataMapper.booleanMapper(it.isFavourite)
-                toggleFavourite(isFavourite)
-            }
+            isFavourite = DataMapper.booleanMapper(it.isFavourite)
+            toggleFavourite(isFavourite)
         }
     }
 
@@ -132,21 +128,19 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding, UserViewModel
         }
     }
 
-    private fun toggleLoading(isLoading: Boolean) {
-        with(viewBinding) {
-            srlRefresh.isRefreshing = isLoading
-            shimmerContainer.showShimmer(isLoading)
+    private fun toggleLoading(isLoading: Boolean) = with(viewBinding) {
+        srlRefresh.isRefreshing = isLoading
+        shimmerContainer.showShimmer(isLoading)
 
-            if (isLoading) {
-                shimmerPlaceholder.root.visible(true)
-                userDetailContainer.visible(false)
-            } else {
-                shimmerContainer.stopShimmer()
-                shimmerContainer.hideShimmer()
+        if (isLoading) {
+            shimmerPlaceholder.root.visible(true)
+            userDetailContainer.visible(false)
+        } else {
+            shimmerContainer.stopShimmer()
+            shimmerContainer.hideShimmer()
 
-                shimmerPlaceholder.root.visible(false)
-                userDetailContainer.visible(true)
-            }
+            shimmerPlaceholder.root.visible(false)
+            userDetailContainer.visible(true)
         }
     }
 
@@ -172,14 +166,12 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding, UserViewModel
         })
     }
 
-    private fun toggleFavourite(isFavourite: Boolean) {
-        with(viewBinding) {
-            if (isFavourite) {
-                btnAddFavourite.setImageResource(R.drawable.ic_favourite_filled)
-                btnAddFavourite.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.colorFavourite))
-            } else {
-                btnAddFavourite.setImageResource(R.drawable.ic_favourite_border)
-            }
+    private fun toggleFavourite(isFavourite: Boolean) = with(viewBinding) {
+        if (isFavourite) {
+            btnAddFavourite.setImageResource(R.drawable.ic_favourite_filled)
+            btnAddFavourite.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.colorFavourite))
+        } else {
+            btnAddFavourite.setImageResource(R.drawable.ic_favourite_border)
         }
     }
 
