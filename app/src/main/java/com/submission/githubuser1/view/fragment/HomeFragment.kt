@@ -16,7 +16,7 @@ import com.submission.githubuser1.R
 import com.submission.githubuser1.databinding.FragmentHomeBinding
 import com.submission.githubuser1.datasource.local.AppPreferences
 import com.submission.githubuser1.datasource.remote.response.ResponseStatus
-import com.submission.githubuser1.datasource.remote.response.User
+import com.submission.githubuser1.model.User
 import com.submission.githubuser1.helper.handleRequestError
 import com.submission.githubuser1.helper.visible
 import com.submission.githubuser1.listener.IOnItemClickListener

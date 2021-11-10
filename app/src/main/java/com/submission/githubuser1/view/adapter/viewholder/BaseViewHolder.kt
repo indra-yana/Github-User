@@ -2,7 +2,7 @@ package com.submission.githubuser1.view.adapter.viewholder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.submission.githubuser1.datasource.remote.response.User
+import com.submission.githubuser1.model.User
 import com.submission.githubuser1.listener.IOnItemClickListener
 
 /****************************************************

@@ -1,6 +1,6 @@
 package com.submission.githubuser1.listener
 
-import com.submission.githubuser1.datasource.remote.response.User
+import com.submission.githubuser1.model.User
 
 
 /****************************************************

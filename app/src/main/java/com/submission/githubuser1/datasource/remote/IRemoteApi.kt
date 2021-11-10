@@ -1,7 +1,7 @@
 package com.submission.githubuser1.datasource.remote
 
 import com.submission.githubuser1.datasource.remote.response.FollowResponse
-import com.submission.githubuser1.datasource.remote.response.UserDetail
+import com.submission.githubuser1.model.UserDetail
 import com.submission.githubuser1.datasource.remote.response.UserSearchResponse
 import com.submission.githubuser1.datasource.remote.response.UserResponse
 import retrofit2.http.GET

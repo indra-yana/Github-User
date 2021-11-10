@@ -1,7 +1,7 @@
 package com.submission.githubuser1.view.adapter.viewholder
 
 import com.submission.githubuser1.databinding.ItemCardFollowBinding
-import com.submission.githubuser1.datasource.remote.response.User
+import com.submission.githubuser1.model.User
 import com.submission.githubuser1.helper.loadImage
 import com.submission.githubuser1.listener.IOnItemClickListener
 

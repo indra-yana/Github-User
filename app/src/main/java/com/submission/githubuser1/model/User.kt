@@ -2,24 +2,36 @@ package com.submission.githubuser1.model
 
 import android.annotation.SuppressLint
 import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-
-/****************************************************
- * Created by Indra Muliana
- * On Saturday, 09/10/2021 21.51
- * Email: indra.ndra26@gmail.com
- * Github: https://github.com/indra-yana
- ****************************************************/
 
 @SuppressLint("ParcelCreator")
 @Parcelize
+@Entity(tableName = "users", indices = [Index(value = ["id"], unique = true)])
 data class User(
-    val name: String,
-    val username: String,
-    val company: String,
-    val location: String,
-    val repository: Int,
-    val followers: Int,
-    val following: Int,
-    val avatar: Int
+    @PrimaryKey
+    @SerializedName("id")
+    @ColumnInfo(name = "id")
+    val id: Int,
+
+    @SerializedName("login")
+    @ColumnInfo(name = "login")
+    val login: String,
+
+    @SerializedName("avatar_url")
+    @ColumnInfo(name = "avatar_url")
+    val avatarUrl: String,
+
+    @SerializedName("repos_url")
+    @ColumnInfo(name = "repos_url")
+    val reposUrl: String,
+
+    @SerializedName("url")
+    @ColumnInfo(name = "url")
+    val url: String
+
 ) : Parcelable

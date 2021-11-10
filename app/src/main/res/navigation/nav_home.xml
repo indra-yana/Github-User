@@ -43,7 +43,7 @@
             app:destination="@id/homeFragment" />
         <argument
             android:name="user"
-            app:argType="com.submission.githubuser1.datasource.remote.response.User" />
+            app:argType="com.submission.githubuser1.model.User" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"

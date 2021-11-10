@@ -1,4 +1,4 @@
-package com.submission.githubuser1.datasource.remote.response
+package com.submission.githubuser1.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

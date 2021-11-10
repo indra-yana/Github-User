@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.submission.githubuser1.datasource.remote.response.*
+import com.submission.githubuser1.model.UserDetail
 import com.submission.githubuser1.repository.UserRepository
 import kotlinx.coroutines.launch
 

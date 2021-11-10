@@ -2,6 +2,7 @@ package com.submission.githubuser1.repository
 
 import com.submission.githubuser1.datasource.remote.response.*
 import com.submission.githubuser1.helper.DataMapper
+import com.submission.githubuser1.model.UserDetail
 
 /****************************************************
  * Created by Indra Muliana

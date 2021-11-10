@@ -1,7 +1,7 @@
 package com.submission.githubuser1.helper
 
-import com.submission.githubuser1.datasource.remote.response.User
-import com.submission.githubuser1.datasource.remote.response.UserDetail
+import com.submission.githubuser1.model.User
+import com.submission.githubuser1.model.UserDetail
 import com.submission.githubuser1.datasource.remote.response.UserResponse
 
 /****************************************************

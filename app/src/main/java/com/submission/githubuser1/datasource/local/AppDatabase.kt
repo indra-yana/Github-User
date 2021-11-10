@@ -6,8 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.submission.githubuser1.datasource.local.dao.UserDao
 import com.submission.githubuser1.datasource.local.dao.UserDetailDao
-import com.submission.githubuser1.datasource.remote.response.User
-import com.submission.githubuser1.datasource.remote.response.UserDetail
+import com.submission.githubuser1.model.User
+import com.submission.githubuser1.model.UserDetail
 
 /****************************************************
  * Created by Indra Muliana

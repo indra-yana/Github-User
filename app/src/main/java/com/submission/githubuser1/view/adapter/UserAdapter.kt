@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.submission.githubuser1.databinding.ItemCardUserBinding
-import com.submission.githubuser1.datasource.remote.response.User
+import com.submission.githubuser1.model.User
 import com.submission.githubuser1.datasource.remote.response.UserResponse
 import com.submission.githubuser1.listener.IOnItemClickListener
 import com.submission.githubuser1.view.adapter.viewholder.BaseViewHolder

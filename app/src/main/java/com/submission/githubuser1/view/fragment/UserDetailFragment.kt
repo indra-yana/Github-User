@@ -13,8 +13,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.submission.githubuser1.R
 import com.submission.githubuser1.databinding.FragmentUserDetailBinding
 import com.submission.githubuser1.datasource.remote.response.ResponseStatus
-import com.submission.githubuser1.datasource.remote.response.User
-import com.submission.githubuser1.datasource.remote.response.UserDetail
+import com.submission.githubuser1.model.User
+import com.submission.githubuser1.model.UserDetail
 import com.submission.githubuser1.helper.*
 import com.submission.githubuser1.repository.UserRepository
 import com.submission.githubuser1.view.adapter.UserFollowFragmentAdapter

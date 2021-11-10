@@ -1,7 +1,7 @@
 package com.submission.githubuser1.datasource.local.dao
 
 import androidx.room.*
-import com.submission.githubuser1.datasource.remote.response.UserDetail
+import com.submission.githubuser1.model.UserDetail
 
 /****************************************************
  * Created by Indra Muliana
