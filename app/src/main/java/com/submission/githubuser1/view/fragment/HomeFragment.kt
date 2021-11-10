@@ -10,6 +10,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.submission.githubuser1.BaseApplication
 import com.submission.githubuser1.R
 import com.submission.githubuser1.databinding.FragmentHomeBinding
@@ -24,7 +25,6 @@ import com.submission.githubuser1.view.adapter.UserAdapter
 import com.submission.githubuser1.view.fragment.base.BaseFragment
 import com.submission.githubuser1.view.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
-import kotlin.random.Random
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserRepository>() {
 
@@ -33,8 +33,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
     }
 
     private lateinit var adapter: UserAdapter
-    private var initialPage: Int = Random.nextInt(1, 100)
-    private var perPage: Int = 20
+
+    // Indicator state.
+    private var isLoading = false
+    private var isNetworkError = false
+    private var isRequestNextPage = false
+
+    // Api paging
+    private var perPage: Int = 10
+    private var initialPage = 1
+    private var nextPage = initialPage
+
+    private var lastVisibleItem: Int = RecyclerView.NO_POSITION
 
     private val pref: AppPreferences by lazy { BaseApplication.pref }
 
@@ -44,7 +54,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fetchData()
+        fetchData(initialPage)
         initAdapter()
     }
 
@@ -63,8 +73,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
             }
 
             srlRefresh.setOnRefreshListener {
-                fetchData()
-                adapter.clearData()
+                isLoading = false
+                isNetworkError = false
+                isRequestNextPage = false
+
+                fetchData(nextPage)
+                // adapter.clearData()
             }
 
             fabFavourite.setOnClickListener {
@@ -104,6 +118,41 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
             rvUser.adapter = adapter
             rvUser.layoutManager = LinearLayoutManager(requireContext())
             rvUser.setHasFixedSize(true)
+            rvUser.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                }
+
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+
+                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                    val visibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
+
+                    if (visibleItem > -1) {
+                        lastVisibleItem = visibleItem
+                    }
+
+                    // Scroll down
+                    if (!recyclerView.canScrollVertically(1)) {
+                        if (!isLoading) {
+                            isRequestNextPage = true
+
+                            if (!isNetworkError) {
+                                nextPage += perPage
+                            }
+
+                            fetchData(nextPage)
+                            Log.d(TAG, "onScrolled: nextPage: $nextPage")
+                        }
+                    }
+
+                    // Scroll up
+                    if (recyclerView.canScrollVertically(-1)) {
+                        // isNetworkError = false
+                    }
+                }
+            })
         }
     }
 
@@ -114,6 +163,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
 
     private fun observeUserList() {
         viewModel.users.observe(viewLifecycleOwner, {
+            isLoading = it is ResponseStatus.Loading
+            isNetworkError = it is ResponseStatus.Failure
+
             toggleLoading(it is ResponseStatus.Loading)
             toggleNoData(it is ResponseStatus.Failure)
 
@@ -124,18 +176,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
                 is ResponseStatus.Success -> {
                     adapter.bindData(it.value)
                     toggleNoData(it.value.isNullOrEmpty())
+                    viewBinding.rvUser.animate().alpha(1f).duration = 1000L
                     Log.d(TAG, "observeUserList: Success!")
                 }
                 is ResponseStatus.Failure -> {
-                    handleRequestError(it) { fetchData() }
+                    handleRequestError(it) { fetchData(nextPage) }
                     Log.d(TAG, "observeUserList: Failure!")
                 }
             }
         })
     }
 
-    private fun fetchData() {
-        viewModel.userList(initialPage, perPage)
+    private fun fetchData(page: Int) {
+        viewModel.userList(page, perPage)
     }
 
     private fun toggleLoading(isLoading: Boolean) {
@@ -158,5 +211,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
 
     private fun toggleNoData(isEmpty: Boolean) {
         viewBinding.tvNoData.visible(isEmpty)
+        if (isEmpty) adapter.clearData()
     }
 }
