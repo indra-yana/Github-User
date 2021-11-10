@@ -1,6 +1,5 @@
 package com.submission.githubuser1.view.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.Job
 
@@ -12,7 +11,6 @@ import kotlinx.coroutines.Job
  ****************************************************/
 
 abstract class BaseUserViewModel : ViewModel() {
-    abstract fun userList(context: Context): Job
     abstract fun userList(page: Int, perPage: Int): Job
     abstract fun userSearch(q: String): Job
     abstract fun userDetail(username: String): Job

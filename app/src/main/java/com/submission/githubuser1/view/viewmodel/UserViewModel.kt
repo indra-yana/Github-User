@@ -1,11 +1,9 @@
 package com.submission.githubuser1.view.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.submission.githubuser1.datasource.remote.response.*
-import com.submission.githubuser1.model.User
 import com.submission.githubuser1.repository.UserRepository
 import kotlinx.coroutines.launch
 
@@ -16,11 +14,9 @@ import kotlinx.coroutines.launch
  * Github: https://github.com/indra-yana
  ****************************************************/
 
-@Suppress("unused")
 class UserViewModel(private val repository: UserRepository) : BaseUserViewModel() {
 
     private val _users: MutableLiveData<ResponseStatus<UserResponse>> = MutableLiveData()
-    private val _userList: MutableLiveData<ResponseStatus<MutableList<User>>> = MutableLiveData()
     private val _userSearch: MutableLiveData<ResponseStatus<UserSearchResponse>> = MutableLiveData()
     private val _userDetail: MutableLiveData<ResponseStatus<UserDetail>> = MutableLiveData()
     private val _userFollower: MutableLiveData<ResponseStatus<FollowResponse>> = MutableLiveData()
@@ -28,18 +24,12 @@ class UserViewModel(private val repository: UserRepository) : BaseUserViewModel(
     private val _isFavourite: MutableLiveData<ResponseStatus<Boolean>> = MutableLiveData()
 
     val users: LiveData<ResponseStatus<UserResponse>> = _users
-    val userList: LiveData<ResponseStatus<MutableList<User>>> = _userList
     val userSearch: LiveData<ResponseStatus<UserSearchResponse>> = _userSearch
     val userDetail: LiveData<ResponseStatus<UserDetail>> = _userDetail
     val userFollower: LiveData<ResponseStatus<FollowResponse>> = _userFollower
     val userFollowing: LiveData<ResponseStatus<FollowResponse>> = _userFollowing
     val isFavourite: LiveData<ResponseStatus<Boolean>> get() = _isFavourite
 
-    // TODO: Remove this unused method
-    override fun userList(context: Context) = viewModelScope.launch {
-        _userList.value = ResponseStatus.Loading
-        _userList.value = repository.userList(context)
-    }
 
     override fun userList(page: Int, perPage: Int) = viewModelScope.launch {
         _users.value = ResponseStatus.Loading

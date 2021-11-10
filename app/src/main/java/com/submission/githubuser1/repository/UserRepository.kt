@@ -1,10 +1,7 @@
 package com.submission.githubuser1.repository
 
-import android.content.Context
 import com.submission.githubuser1.datasource.remote.response.*
 import com.submission.githubuser1.helper.DataMapper
-import com.submission.githubuser1.helper.DataUtils
-import com.submission.githubuser1.model.User
 
 /****************************************************
  * Created by Indra Muliana
@@ -14,11 +11,6 @@ import com.submission.githubuser1.model.User
  ****************************************************/
 
 class UserRepository : BaseRepository() {
-
-    suspend fun userList(context: Context): ResponseStatus<MutableList<User>> = safeApiCall {
-        // Dummy users from local assets
-        DataUtils.getUserList(context)
-    }
 
     suspend fun userList(page: Int, perPage: Int): ResponseStatus<UserResponse> = safeApiCall {
         remoteApi.users(page, perPage)
