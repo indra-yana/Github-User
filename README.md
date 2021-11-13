@@ -1,7 +1,7 @@
 # Github-User
 Github user app - dicoding submission BFAA
 
-**Status** : Maintained :toolbox:
+**Status**: Maintained :hammer_and_wrench:
 
 ## Features
 - Kotlin
@@ -27,6 +27,7 @@ Github user app - dicoding submission BFAA
 ## Show Case
 <p align="center">
     <img src="screenshot/demo.gif" width="250" title="Click to enlarge">
+    <img src="screenshot/splash.png" width="250" title="Click to enlarge">
     <img src="screenshot/home.png" width="250" title="Click to enlarge">
     <img src="screenshot/detail.png" width="250" title="Click to enlarge">
     <img src="screenshot/favourite.png" width="250" title="Click to enlarge">
@@ -34,6 +35,8 @@ Github user app - dicoding submission BFAA
 </p>
 
 #### Credits
-Copyright © 2021 Indra Muliana (indra.ndra26@gmail.com)
+Feel free to clone this project for your references.
+I really appreciate if you give a star for this repo or following my account. cheers! :clinking_glasses:
 
+Copyright ©2021 Indra Muliana (indra.ndra26@gmail.com)
 Build With :coffee:
