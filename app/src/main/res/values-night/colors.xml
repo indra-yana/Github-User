@@ -3,11 +3,12 @@
 
     <color name="colorPrimary">#37474f</color>
     <color name="colorPrimaryLight" tools:keep="@color/colorPrimaryLight">#62727b</color>
-    <color name="secondaryColor" tools:keep="@color/secondaryColor">#ffa000</color>
+    <color name="secondaryColor">#ffa000</color>
     <color name="colorPrimaryDark">#102027</color>
     <color name="colorAccent">#ffd149</color>
 
     <color name="colorPrimaryWhite100">#000000</color>
     <color name="colorTextBlack100">#FFFFFF</color>
+    <color name="colorIconFab">#37474f</color>
 
 </resources>

@@ -3,7 +3,7 @@
 
     <color name="colorPrimary">#37474f</color>
     <color name="colorPrimaryLight" tools:keep="@color/colorPrimaryLight">#62727b</color>
-    <color name="secondaryColor" tools:keep="@color/secondaryColor">#ffa000</color>
+    <color name="secondaryColor">#ffa000</color>
     <color name="colorPrimaryDark">#102027</color>
     <color name="colorAccent">#ffd149</color>
 
@@ -16,11 +16,12 @@
 
     <color name="colorSuccess" tools:keep="@color/colorSuccess">#1C8721</color>
     <color name="colorWarning" tools:keep="@color/colorWarning">#FDBE3B</color>
-    <color name="colorDanger" tools:keep="@color/colorDanger">#C62828</color>
-    <color name="colorFavourite" tools:keep="@color/colorDanger">#FF8181</color>
+    <color name="colorDanger">#C62828</color>
+    <color name="colorFavourite">#FF8181</color>
 
     <color name="colorIconWhite100">#FFFFFF</color>
     <color name="colorIconGrey20" >#BDBDBD</color>
+    <color name="colorIconFab">#FFFFFF</color>
 
     <color name="colorTextWhite100">#FFFFFF</color>
     <color name="colorTextBlack100">#000000</color>

@@ -101,7 +101,7 @@
         android:src="@drawable/ic_favourite_filled"
         app:backgroundTint="@color/secondaryColor"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
-        app:tint="@color/colorIconWhite100" />
+        app:tint="@color/colorIconFab" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
