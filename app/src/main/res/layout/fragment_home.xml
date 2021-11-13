@@ -25,15 +25,15 @@
                 style="@style/Header.H5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
                 android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:elevation="@dimen/_5sdp"
-                android:visibility="gone"
+                android:text="@string/text_no_data_found"
                 android:textColor="@color/colorTextBlack100"
-                app:layout_constraintTop_toBottomOf="@+id/layoutHeader"
-                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="@string/text_no_data_found" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutHeader" />
 
             <TextView
                 android:id="@+id/tvHeaderSubtitle"
@@ -100,7 +100,6 @@
         android:focusable="true"
         android:src="@drawable/ic_favourite_filled"
         app:backgroundTint="@color/secondaryColor"
-        app:fabCustomSize="@dimen/_35sdp"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         app:tint="@color/colorIconWhite100" />
 

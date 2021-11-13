@@ -16,9 +16,6 @@ interface UserDao {
     @Query("SELECT * FROM users WHERE `id` = :key")
     suspend fun find(key: String): User?
 
-    @Query("SELECT * FROM users ORDER BY id DESC")
-    suspend fun all(): List<User>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(value: User)
 

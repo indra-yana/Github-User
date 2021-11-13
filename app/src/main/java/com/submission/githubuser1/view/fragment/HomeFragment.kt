@@ -160,8 +160,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
             isLoading = it is ResponseStatus.Loading
             isNetworkError = it is ResponseStatus.Failure
 
-            toggleLoading(it is ResponseStatus.Loading)
-            toggleNoData(it is ResponseStatus.Failure)
+            toggleLoading(isLoading)
+            toggleNoData(isNetworkError)
 
             when (it) {
                 is ResponseStatus.Loading -> {

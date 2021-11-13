@@ -3,6 +3,7 @@ package com.submission.githubuser1
 import android.app.Application
 import com.submission.githubuser1.datasource.local.AppDatabase
 import com.submission.githubuser1.datasource.local.AppPreferences
+import com.submission.githubuser1.datasource.local.dataStore
 import com.submission.githubuser1.datasource.remote.AppRemoteApi
 import com.submission.githubuser1.datasource.remote.IRemoteApi
 
@@ -15,6 +16,14 @@ import com.submission.githubuser1.datasource.remote.IRemoteApi
 
 class BaseApplication : Application() {
 
+    override fun onCreate() {
+        super.onCreate()
+
+        remoteApi = AppRemoteApi.initApi(IRemoteApi::class.java)
+        appDB = AppDatabase.initDatabase(this)
+        pref = AppPreferences.initPreferences(dataStore)
+    }
+
     companion object {
         @JvmStatic
         lateinit var remoteApi: IRemoteApi
@@ -24,14 +33,6 @@ class BaseApplication : Application() {
 
         @JvmStatic
         lateinit var pref: AppPreferences
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-
-        remoteApi = AppRemoteApi.initApi(IRemoteApi::class.java)
-        appDB = AppDatabase.initDatabase(this)
-        pref = AppPreferences.initPreferences(this)
     }
 
 }

@@ -19,14 +19,8 @@ interface UserDetailDao {
     @Query("SELECT * FROM user_details WHERE `login` = :username")
     suspend fun find(username: String): UserDetail?
 
-    @Query("SELECT * FROM user_details")
-    suspend fun all(): List<UserDetail>
-
     @Query("SELECT * FROM user_details WHERE is_favourite = 1")
     suspend fun getUserFavourite(): List<UserDetail>
-
-    @Query("SELECT * FROM user_details WHERE `id` LIKE '%' || :key || '%' AND `name` LIKE '%' || :key || '%' AND is_favourite = 1")
-    suspend fun findUserFavourite(key: String): List<UserDetail>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(value: UserDetail)

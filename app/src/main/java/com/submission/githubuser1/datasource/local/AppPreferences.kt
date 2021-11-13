@@ -16,27 +16,27 @@ import kotlinx.coroutines.flow.map
  * Github: https://github.com/indra-yana
  ****************************************************/
 
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "setting")
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "setting")
 
-class AppPreferences(val context: Context) {
+class AppPreferences(private val dataStore: DataStore<Preferences>) {
 
-    private val THEME_KEY = booleanPreferencesKey("theme_setting")
-
-    fun getThemeSetting(): Flow<Boolean> = context.dataStore.data.map {
+    fun getThemeSetting(): Flow<Boolean> = dataStore.data.map {
         it[THEME_KEY] ?: false
     }
 
-    suspend fun saveThemeSetting(isDarkModeActive: Boolean) = context.dataStore.edit {
+    suspend fun saveThemeSetting(isDarkModeActive: Boolean) = dataStore.edit {
         it[THEME_KEY] = isDarkModeActive
     }
 
     companion object {
+        private val THEME_KEY = booleanPreferencesKey("theme_setting")
+
         @Volatile
         private var INSTANCE: AppPreferences? = null
 
-        fun initPreferences(context: Context): AppPreferences {
+        fun initPreferences(dataStore: DataStore<Preferences>): AppPreferences {
             return INSTANCE ?: synchronized(this) {
-                val instance = AppPreferences(context)
+                val instance = AppPreferences(dataStore)
                 INSTANCE = instance
                 instance
             }
