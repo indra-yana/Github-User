@@ -4,23 +4,15 @@
     <color name="colorPrimary">#37474f</color>
     <color name="colorPrimaryLight" tools:keep="@color/colorPrimaryLight">#62727b</color>
     <color name="secondaryColor" tools:keep="@color/secondaryColor">#ffa000</color>
-    <color name="secondaryLightColor" tools:keep="@color/secondaryLightColor">#ffd149</color>
-    <color name="secondaryDarkColor" tools:keep="@color/secondaryDarkColor">#c67100</color>
     <color name="colorPrimaryDark">#102027</color>
-    <color name="colorAccent">#96bb82</color>
+    <color name="colorAccent">#ffd149</color>
 
     <!-- Custom Color -->
-    <color name="colorPrimaryTransparent50" tools:keep="@color/colorPrimaryTransparent50">#8037474f</color>
     <color name="colorPrimaryLightTransparent50">#8062727b</color>
-    <color name="colorPrimaryDarkTransparent50" tools:keep="@color/colorPrimaryDarkTransparent50">#80102027</color>
-    <color name="colorPrimaryGreyTransparent50" tools:keep="@color/colorPrimaryGreyTransparent50">#B3616161</color>
 
     <color name="colorPrimaryWhite100">#FFFFFF</color>
-    <color name="colorPrimaryBlack100" tools:keep="@color/colorPrimaryBlack100">#000000</color>
-    <color name="colorPrimaryGrey80" tools:keep="@color/colorPrimaryGrey80">#616161</color>
     <color name="colorPrimaryGrey60">#757575</color>
     <color name="colorPrimaryGrey40">#9E9E9E</color>
-    <color name="colorPrimaryGrey20" tools:keep="@color/colorPrimaryGrey20">#BDBDBD</color>
 
     <color name="colorSuccess" tools:keep="@color/colorSuccess">#1C8721</color>
     <color name="colorWarning" tools:keep="@color/colorWarning">#FDBE3B</color>
@@ -28,21 +20,9 @@
     <color name="colorFavourite" tools:keep="@color/colorDanger">#FF8181</color>
 
     <color name="colorIconWhite100">#FFFFFF</color>
-    <color name="colorIconBlack100" tools:keep="@color/colorIconBlack100">#000000</color>
-    <color name="colorIconGrey100" tools:keep="@color/colorIconGrey100">#3d3d3d</color>
-    <color name="colorIconGrey80" tools:keep="@color/colorIconGrey80">#616161</color>
-    <color name="colorIconGrey60" tools:keep="@color/colorIconGrey60">#757575</color>
-    <color name="colorIconGrey40" tools:keep="@color/colorIconGrey40">#9E9E9E</color>
-    <color name="colorIconGrey20" tools:keep="@color/colorIconGrey20">#BDBDBD</color>
-    <color name="colorIconGrey10" tools:keep="@color/colorIconGrey10">#EEEEEE</color>
+    <color name="colorIconGrey20" >#BDBDBD</color>
 
     <color name="colorTextWhite100">#FFFFFF</color>
     <color name="colorTextBlack100">#000000</color>
-    <color name="colorTextGrey100" tools:keep="@color/colorTextGrey100">#3d3d3d</color>
-    <color name="colorTextGrey80" tools:keep="@color/colorTextGrey80">#616161</color>
-    <color name="colorTextGrey60" tools:keep="@color/colorTextGrey60">#757575</color>
-    <color name="colorTextGrey40" tools:keep="@color/colorTextGrey40">#9E9E9E</color>
-    <color name="colorTextGrey20" tools:keep="@color/colorTextGrey20">#BDBDBD</color>
-    <color name="colorTextGrey10" tools:keep="@color/colorTextGrey10">#EEEEEE</color>
 
 </resources>
