@@ -46,15 +46,17 @@ object AppRemoteApi {
         }
 
         // Add logging interceptor if needed
-        val loggingInterceptor = HttpLoggingInterceptor().apply {
-            setLevel(HttpLoggingInterceptor.Level.BODY)
+        val loggingInterceptor = if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        } else {
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
         }
 
         // OkHttpClient
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(requestInterceptor)
             .apply {
-                if(BuildConfig.DEBUG) {
+                if (BuildConfig.DEBUG) {
                     addInterceptor(loggingInterceptor)
                 }
             }
