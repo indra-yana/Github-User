@@ -1,9 +1,9 @@
-# Github-User
+## Github-User
 Github user app - dicoding submission BFAA
 
 **Status**: Maintained :hammer_and_wrench:
 
-## Features
+### Features
 - Kotlin
 - MVVM Design Pattern
 - Local and Remote Data Source
@@ -11,7 +11,7 @@ Github user app - dicoding submission BFAA
 - Github User API ([GitHub REST API](https://docs.github.com/en/rest))
 - etc
 
-## Dependency
+### Dependency
 - Retrofit
 - ViewModel
 - LiveData
@@ -24,7 +24,7 @@ Github user app - dicoding submission BFAA
 - Shimmer
 - etc
 
-## Show Case
+### Show Case
 <p align="center">
     <img src="screenshot/demo.gif" width="250" title="Click to enlarge">
     <img src="screenshot/splash.png" width="250" title="Click to enlarge">
@@ -34,9 +34,10 @@ Github user app - dicoding submission BFAA
     <img src="screenshot/search.png" width="250" title="Click to enlarge">
 </p>
 
-#### Credits
+### Credits
 Feel free to clone this project for your references.
 I really appreciate if you give a star for this repo or following my account. cheers! :clinking_glasses:
 
 Copyright ©2021 Indra Muliana (indra.ndra26@gmail.com)
+
 Build With :coffee:
