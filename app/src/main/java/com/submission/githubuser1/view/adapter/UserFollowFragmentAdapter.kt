@@ -14,7 +14,7 @@ import com.submission.githubuser1.view.fragment.FollowFragment
 
 class UserFollowFragmentAdapter(fragment: Fragment, private val key: String?) : FragmentStateAdapter(fragment) {
 
-    val fragmentTitle = listOf(
+    val fragmentTitle = arrayListOf(
         fragment.getString(R.string.text_followers),
         fragment.getString(R.string.text_following),
     )

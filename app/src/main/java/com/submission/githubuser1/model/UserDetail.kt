@@ -15,7 +15,7 @@ class UserDetail(
 
     @SerializedName("name")
     @ColumnInfo(name = "name")
-    val name: String,
+    val name: String?,
 
     @SerializedName("login")
     @ColumnInfo(name = "login")

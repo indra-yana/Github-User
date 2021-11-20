@@ -28,14 +28,15 @@
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_60sdp"
         android:layout_marginStart="@dimen/_10sdp"
+        android:background="@color/colorIconWhite100"
         android:elevation="@dimen/_3sdp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:riv_border_color="@color/colorPrimaryGrey40"
         app:riv_border_width="@dimen/_2sdp"
         app:riv_corner_radius="@dimen/_4sdp"
+        app:riv_mutate_background="true"
         tools:src="@tools:sample/avatars" />
 
     <TextView

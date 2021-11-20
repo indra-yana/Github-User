@@ -76,7 +76,7 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding, UserViewModel
             tvRepositoryCount.text = it.publicRepos.toString()
             tvFollowersCount.text = it.followers.toString()
             tvFollowingCount.text = it.following.toString()
-            tvItemTitle.text = it.name
+            tvItemTitle.text = it.name ?: getString(R.string.text_not_available)
             tvItemSubtitle.text = ("@${it.login}")
             tvItemLocation.text = it.location ?: getString(R.string.text_not_available)
             tvItemCompany.text = it.company ?: getString(R.string.text_not_available)

@@ -10,5 +10,6 @@
     <color name="colorPrimaryWhite100">#000000</color>
     <color name="colorTextBlack100">#FFFFFF</color>
     <color name="colorIconFab">#37474f</color>
+    <color name="colorPrimaryItem">#37474f</color>
 
 </resources>

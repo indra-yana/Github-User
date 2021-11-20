@@ -22,6 +22,7 @@
     <color name="colorIconWhite100">#FFFFFF</color>
     <color name="colorIconGrey20" >#BDBDBD</color>
     <color name="colorIconFab">#FFFFFF</color>
+    <color name="colorPrimaryItem">#FFFFFF</color>
 
     <color name="colorTextWhite100">#FFFFFF</color>
     <color name="colorTextBlack100">#000000</color>

@@ -16,10 +16,10 @@ import com.submission.githubuser1.R
 import com.submission.githubuser1.databinding.FragmentHomeBinding
 import com.submission.githubuser1.datasource.local.AppPreferences
 import com.submission.githubuser1.datasource.remote.response.ResponseStatus
-import com.submission.githubuser1.model.User
 import com.submission.githubuser1.helper.handleRequestError
 import com.submission.githubuser1.helper.visible
 import com.submission.githubuser1.listener.IOnItemClickListener
+import com.submission.githubuser1.model.User
 import com.submission.githubuser1.repository.UserRepository
 import com.submission.githubuser1.view.adapter.UserAdapter
 import com.submission.githubuser1.view.fragment.base.BaseFragment
@@ -54,7 +54,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fetchData(initialPage)
+        fetchData()
         initAdapter()
     }
 
@@ -76,7 +76,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
             isNetworkError = false
             isRequestNextPage = false
 
-            fetchData(nextPage)
+            fetchData()
             // adapter.clearData()
         }
 
@@ -133,9 +133,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
 
                         if (!isNetworkError) {
                             nextPage += perPage
+                            viewModel.setPage(nextPage)
                         }
 
-                        fetchData(nextPage)
+                        fetchData()
                         Log.d(TAG, "onScrolled: nextPage: $nextPage")
                     }
                 }
@@ -168,28 +169,39 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
                     Log.d(TAG, "observeUserList: Loading!")
                 }
                 is ResponseStatus.Success -> {
-                    adapter.bindData(it.value)
-                    toggleNoData(it.value.isNullOrEmpty())
-                    viewBinding.rvUser.animate().alpha(1f).duration = 1000L
+                    viewModel.setUserList(it.value)
                     Log.d(TAG, "observeUserList: Success!")
                 }
                 is ResponseStatus.Failure -> {
-                    handleRequestError(it) { fetchData(nextPage) }
+                    handleRequestError(it) { fetchData() }
                     Log.d(TAG, "observeUserList: Failure!")
                 }
             }
         })
+
+        viewModel.usersList.observe(viewLifecycleOwner, {
+            toggleNoData(it.isNullOrEmpty())
+            it?.let { users ->
+                adapter.bindData(users)
+            }
+        })
+
+        viewModel.page.observe(viewLifecycleOwner, {
+            it?.let { page ->
+                nextPage = page
+            }
+        })
     }
 
-    override fun fetchData(page: Int) {
-        viewModel.userList(page, perPage)
+    override fun fetchData() {
+         viewModel.userList(viewModel.getPage(), perPage)
     }
 
     override fun toggleLoading(isLoading: Boolean) = with(viewBinding) {
         srlRefresh.isRefreshing = isLoading
-        shimmerContainer.showShimmer(isLoading)
+        shimmerContainer.showShimmer(isLoading && !isRequestNextPage)
 
-        if (isLoading) {
+        if (isLoading && !isRequestNextPage) {
             shimmerPlaceholder.root.visible(true)
             rvUser.visible(false)
         } else {

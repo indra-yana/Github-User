@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Github User1</string>
+    <string name="app_name">Github User</string>
     <string name="text_lorem_ipsum_title">Lorem ipsum dolor sit amet</string>
     <string name="text_lorem_ipsum_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum.</string>
     <string name="text_home_title">Github User</string>

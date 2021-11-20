@@ -21,7 +21,7 @@ import com.submission.githubuser1.model.UserDetail
         User::class,
         UserDetail::class
     ],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 

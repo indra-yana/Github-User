@@ -119,3 +119,9 @@ fun ImageView.loadImage(url: String?) {
         .centerCrop()
         .into(this)
 }
+
+fun<T> ArrayList<T>.addAllFiltered(items: ArrayList<T>) {
+    this.addAll(items.filterNot {
+        this.contains(it)
+    })
+}

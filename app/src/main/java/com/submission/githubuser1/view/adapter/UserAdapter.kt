@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.submission.githubuser1.databinding.ItemCardUserBinding
 import com.submission.githubuser1.model.User
 import com.submission.githubuser1.datasource.remote.response.UserResponse
+import com.submission.githubuser1.helper.addAllFiltered
 import com.submission.githubuser1.listener.IOnItemClickListener
 import com.submission.githubuser1.view.adapter.viewholder.BaseViewHolder
 import com.submission.githubuser1.view.adapter.viewholder.UserViewHolder
@@ -36,15 +37,11 @@ class UserAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int = itemList.size
 
-    fun bindData(itemList: MutableList<User>) {
+    fun bindData(itemList: ArrayList<User>) {
         // The pagination in github user api sometime give the same list result
         // so in this case I use map filtering to avoid same data fetched or displayed in the list
         val oldCount: Int = itemCount
-        val filtered = itemList.filterNot {
-            this.itemList.contains(it)
-        }
-
-        this.itemList.addAll(filtered)
+        this.itemList.addAllFiltered(itemList)
         notifyItemRangeInserted(oldCount, itemCount)
     }
 
