@@ -61,7 +61,7 @@ class FavouriteFragment : BaseBottomSheetDialogFragment<FragmentFavouriteDialogB
         fetchData()
     }
 
-    private fun prepareUI() = with(viewBinding) {
+    override fun prepareUI() = with(viewBinding) {
         tvBottomSheetTitle.text = getString(R.string.text_favourite)
 
         btnClose.setOnClickListener {
@@ -127,11 +127,11 @@ class FavouriteFragment : BaseBottomSheetDialogFragment<FragmentFavouriteDialogB
         })
     }
 
-    private fun fetchData() {
+    override fun fetchData() {
         viewModel.getFavourite()
     }
 
-    private fun toggleLoading(isLoading: Boolean) = with(viewBinding) {
+    override fun toggleLoading(isLoading: Boolean) = with(viewBinding) {
         shimmerContainer.showShimmer(isLoading)
 
         if (isLoading) {
@@ -146,7 +146,7 @@ class FavouriteFragment : BaseBottomSheetDialogFragment<FragmentFavouriteDialogB
         }
     }
 
-    private fun toggleNoData(isEmpty: Boolean) {
+    override fun toggleNoData(isEmpty: Boolean) {
         viewBinding.tvNoData.visible(isEmpty)
     }
 }

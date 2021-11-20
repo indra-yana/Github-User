@@ -49,7 +49,7 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding, UserViewModel
         observeFavourite()
     }
 
-    private fun prepareUI() = with(viewBinding) {
+    override fun prepareUI() = with(viewBinding) {
         tvHeaderTitle.text = getString(R.string.text_profile)
         btnBack.setOnClickListener {
             findNavController().navigateUp()
@@ -122,13 +122,13 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding, UserViewModel
         })
     }
 
-    private fun fetchData() {
+    override fun fetchData() {
         user?.let {
             viewModel.userDetail(it.login)
         }
     }
 
-    private fun toggleLoading(isLoading: Boolean) = with(viewBinding) {
+    override fun toggleLoading(isLoading: Boolean) = with(viewBinding) {
         srlRefresh.isRefreshing = isLoading
         shimmerContainer.showShimmer(isLoading)
 

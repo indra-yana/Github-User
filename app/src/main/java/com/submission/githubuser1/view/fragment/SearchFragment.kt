@@ -54,7 +54,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, UserViewModel, UserRe
         observeUserSearch()
     }
 
-    private fun prepareUI() = with(viewBinding) {
+    override fun prepareUI() = with(viewBinding) {
         btnBack.setOnClickListener {
             showInputMethod(false)
             findNavController().navigateUp()
@@ -158,7 +158,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, UserViewModel, UserRe
         viewModel.userSearch(q)
     }
 
-    private fun toggleLoading(isLoading: Boolean) = with(viewBinding) {
+    override fun toggleLoading(isLoading: Boolean) = with(viewBinding) {
         srlRefresh.isRefreshing = isLoading
         shimmerContainer.showShimmer(isLoading)
 
@@ -174,7 +174,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, UserViewModel, UserRe
         }
     }
 
-    private fun toggleNoData(isEmpty: Boolean) {
+    override fun toggleNoData(isEmpty: Boolean) {
         viewBinding.tvNoData.visible(isEmpty)
     }
 }

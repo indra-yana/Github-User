@@ -65,7 +65,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
         observeUserList()
     }
 
-    private fun prepareUI() = with(viewBinding) {
+    override fun prepareUI() = with(viewBinding) {
         layoutHeader.tvHeaderTitle.text = getString(R.string.text_home_title)
         layoutHeader.ivHeaderSearch.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
@@ -181,11 +181,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
         })
     }
 
-    private fun fetchData(page: Int) {
+    override fun fetchData(page: Int) {
         viewModel.userList(page, perPage)
     }
 
-    private fun toggleLoading(isLoading: Boolean) = with(viewBinding) {
+    override fun toggleLoading(isLoading: Boolean) = with(viewBinding) {
         srlRefresh.isRefreshing = isLoading
         shimmerContainer.showShimmer(isLoading)
 
@@ -202,7 +202,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, UserViewModel, UserReposi
 
     }
 
-    private fun toggleNoData(isEmpty: Boolean) {
+    override fun toggleNoData(isEmpty: Boolean) {
         viewBinding.tvNoData.visible(isEmpty)
         if (isEmpty) adapter.clearData()
     }

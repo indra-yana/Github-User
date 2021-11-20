@@ -103,7 +103,7 @@ class FollowFragment : BaseFragment<FragmentFollowBinding, UserViewModel, UserRe
         }
     }
 
-    private fun fetchData() {
+    override fun fetchData() {
         username?.let { username ->
             if (!title.isNullOrEmpty() && title == getString(R.string.text_followers)) {
                 viewModel.userFollower(username)
@@ -115,7 +115,7 @@ class FollowFragment : BaseFragment<FragmentFollowBinding, UserViewModel, UserRe
         }
     }
 
-    private fun toggleLoading(isLoading: Boolean) = with(viewBinding) {
+    override fun toggleLoading(isLoading: Boolean) = with(viewBinding) {
         shimmerContainer.showShimmer(isLoading)
 
         if (isLoading) {

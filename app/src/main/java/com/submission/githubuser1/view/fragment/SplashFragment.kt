@@ -14,10 +14,11 @@ import com.submission.githubuser1.helper.Constant
 
 class SplashFragment : Fragment() {
 
-    private lateinit var splashBinding: FragmentSplashBinding
+    private var _splashBinding: FragmentSplashBinding? = null
+    private val splashBinding get() = _splashBinding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        splashBinding = FragmentSplashBinding.inflate(inflater, container, false)
+        _splashBinding = FragmentSplashBinding.inflate(inflater, container, false)
 
         return splashBinding.root
     }
@@ -29,4 +30,10 @@ class SplashFragment : Fragment() {
             findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
         }, Constant.DELAY_SPLASH)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _splashBinding = null
+    }
+
 }

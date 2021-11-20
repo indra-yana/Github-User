@@ -15,8 +15,21 @@ interface FragmentContract<VB, VM, BR> {
     val viewBinding: VB
     val viewModel: VM
 
+    /*
+     * Required method to be contracted
+    */
     fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
     fun getViewModel(): Class<VM>
     fun getRepository(): BR
+
+    /*
+     * Optional method to be contracted
+    */
+    fun prepareUI() { }
+    fun updateUI() { }
+    fun toggleLoading(isLoading: Boolean) { }
+    fun toggleNoData(isEmpty: Boolean) { }
+    fun fetchData(page: Int) { }
+    fun fetchData() { }
 
 }
